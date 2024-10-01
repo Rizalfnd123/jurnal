@@ -1,0 +1,340 @@
+body,
+        .sidebar {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .page-header {
+            margin-top: 15px background-color: #000000;
+            /* Ganti dengan warna yang diinginkan */
+            border-radius: 8px;
+            /* Ganti dengan nilai radius yang diinginkan */
+            padding: 15px;
+            /* Padding untuk memberi ruang di dalam elemen */
+            margin-bottom: 20px;
+            /* Jarak bawah dari elemen lain */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Menambahkan bayangan jika diinginkan */
+        }
+
+
+        .card,
+        .table {
+            border-radius: 15px;
+            /* Membuat sudut rounded */
+        }
+
+        .btn {
+            border-radius: 10px;
+            /* Membuat tombol lebih rounded */
+        }
+
+        /*buton*/
+        /* From Uiverse.io by gharsh11032000 */
+        .button {
+            cursor: pointer;
+            position: relative;
+            padding: 10px 24px;
+            font-size: 12px;
+            color: #91665a;
+            border: 2px solid #91665a;
+            border-radius: 34px;
+            background-color: transparent;
+            font-weight: 400;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: inherit;
+            scale: 0;
+            color: #91665a;
+            z-index: -1;
+            background-color: #91665a;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .button:hover::before {
+            scale: 3;
+        }
+
+        .button:hover {
+            color: #ffffff;
+            scale: 1.1;
+            box-shadow: 0 0px 20px rgba(193, 163, 98, 0.4);
+        }
+
+        .button:active {
+            scale: 1;
+        }
+
+
+
+        /* Style untuk form filter */
+        .filter-form {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-form .form-control {
+            border-radius: 4px;
+            border-color: #ced4da;
+        }
+
+        .filter-form .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        .filter-form label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-form .btn {
+            margin-top: 1rem;
+        }
+
+        .filter-form .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .filter-form .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        /* Style untuk overlay loading */
+        #loading-overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+        }
+
+        /* Loader animation */
+        .loader {
+            border: 8px solid #f3f3f3;
+            /* Light grey */
+            border-top: 8px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+
+        /* Atur warna sidebar menjadi coklat gelap */
+        #left-panel {
+            background-color: #6F4E37;
+            /* Coklat gelap */
+            color: white;
+        }
+
+        #left-panel .navbar-nav li a {
+            color: white;
+            /* Warna teks di dalam sidebar */
+        }
+
+        #left-panel .navbar-nav li a:hover {
+            background-color: #6F4E37;
+            /* Warna ketika di hover */
+            color: #f8f9fa;
+        }
+
+        .navbar-header {
+            background-color: #6F4E37;
+        }
+
+        #main-menu .navbar-nav {
+            background-color: #6F4E37;
+        }
+
+        /* Untuk dropdown menu Data Umum */
+        .menu-item-has-children .sub-menu {
+            background-color: #6F4E37 !important;
+            /* Warna hitam */
+            color: white !important;
+        }
+
+        .menu-item-has-children .sub-menu a {
+            color: white !important;
+            /* Warna teks putih */
+        }
+
+        .menu-item-has-children .sub-menu a:hover {
+            background-color: #6F4E37 !important;
+            /* Warna hitam keabu-abuan ketika hover */
+            color: #f8f9fa !important;
+        }
+
+
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Atur warna background pada panel kanan */
+        #right-panel {
+            background-color: #ECB176 !important;
+            /* Coklat gelap */
+            color: white;
+            /* Warna teks agar kontras */
+        }
+
+        /* Atur warna navbar di bagian atas */
+        .header {
+            background-color: #6F4E37 !important;
+            /* Coklat lebih gelap untuk navbar */
+            color: white;
+        }
+
+        /* Atur warna konten di dalam panel kanan */
+        #right-panel .content {
+            background-color: #ECB176 !important;
+            /* Warna coklat medium untuk konten */
+            color: white;
+        }
+
+        /* Atur warna link dan hover efek di dalam konten */
+        #right-panel a {
+            color: #f8f9fa !important;
+        }
+
+        #right-panel a:hover {
+            color: #e0e0e0 !important;
+            text-decoration: none;
+        }
+
+        .breadcrumbs {
+            background-color: #ECB176 !important;
+        }
+
+        .breadcrumb {
+            background-color: #ECB176 !important;
+        }
+
+        .page-header {
+            background-color: #ECB176 !important;
+        }
+
+        .page-title {
+            background-color: #ECB176 !important;
+        }
+
+        /* Menetapkan font untuk sidebar */
+        .left-panel {
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        /* Jika ingin mengatur font untuk semua teks di dalam navbar */
+        .navbar {
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        /* Untuk ikon dalam menu */
+        .navbar-nav .nav-link {
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        /* Gaya untuk tabel */
+        #bootstrap-data-table {
+            border-radius: 8px;
+            /* Membuat sudut tabel membulat */
+            overflow: hidden;
+            /* Agar sudut membulat terlihat */
+            background-color: #f5f5f5;
+            /* Warna latar belakang tabel */
+        }
+
+        #bootstrap-data-table th {
+            background-color: #ECB176;
+            /* Warna coklat untuk header tabel */
+            color: white;
+            /* Warna teks putih untuk kontras */
+            padding: 10px;
+            /* Menambah padding di header */
+        }
+
+        #bootstrap-data-table td {
+            background-color: #fff;
+            /* Warna putih untuk sel tabel */
+            padding: 10px;
+            /* Menambah padding di sel */
+        }
+
+        #bootstrap-data-table tr:nth-child(even) {
+            background-color: #e0e0e0;
+            /* Warna latar belakang untuk baris genap */
+        }
+
+        #bootstrap-data-table tr:hover {
+            background-color: #d7ccc8;
+            /* Warna saat hover */
+        }
+
+        .btn-warning {
+            background-color: #ECB176;
+            /* Warna latar belakang tombol */
+            border-color: #ECB176;
+            /* Warna border tombol */
+        }
+
+        .btn-warning:hover {
+            background-color: #ECB176;
+            /* Warna latar belakang tombol saat hover */
+        }
+
+        .card-body {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Menambahkan bayangan */
+            border-radius: 8px;
+            /* Sudut membulat */
+            transition: box-shadow 0.3s ease;
+            /* Animasi saat hover */
+        }
+
+        .card-body:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            /* Bayangan lebih dalam saat hover */
+        }
+
+        #left-panel {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Efek shadow */
+            /* Sudut membulat */
+            transition: box-shadow 0.3s ease;
+            /* Animasi saat hover */
+        }
+
+        #left-panel:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            /* Shadow lebih dalam saat hover */
+        }
+
+        .header{
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            /* Shadow ringan */
+            /* Menambah ruang di dalam div */
+            /* Membuat sudut rounded */
+        }
