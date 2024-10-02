@@ -33,7 +33,7 @@
                 </div>
             @endif
             <div class="card">
-                <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-primary w-100 rounded">
+                <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-primary w-100 rounded-full" style="color: brown">
                     Lihat Jadwal Hari Ini
                 </a>
             </div>
@@ -96,18 +96,18 @@
                                     <td>{{ $item->dokumentasi }}</td>
                                     <td>
                                         <a href="{{ route('absensi.create', ['jurnal_id' => $item->id]) }}" class="btn btn-success">
-                                            <i class="fa fa-check"></i> Isi Absensi
+                                            <i class="fa fa-book"></i> 
                                         </a>
                                         
                                         <a href="{{ url('jurnal/' . $item->id . '/edit') }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> Edit
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('jurnal/' . $item->id) }}" method="post" class="d-inline"
                                             onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

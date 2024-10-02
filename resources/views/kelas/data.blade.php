@@ -48,14 +48,14 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>kelas</th>
+                                <th>Kelas</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
                             @foreach ($kelas as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $loop->iteration + ($kelas->currentPage()-1) * $kelas->perPage() }}</td>
                                     <td>{{ $item->kelas }}</td>
                                     <td>
                                         <a href="{{ url('kelas/edit/' . $item->id) }}" class="btn btn-primary">
@@ -65,7 +65,7 @@
                                             onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger -sm">
+                                            <button class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"> Hapus</i>
                                             </button>
                                         </form>
@@ -74,8 +74,18 @@
                             @endforeach
                         </tbody>
                     </table>
+            
+                    <!-- Show pagination information and buttons -->
+                    <div>
+                        
+                        <div>
+                            <!-- Pagination on the right -->
+                            {{ $kelas->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
+            
 
         </div>
 

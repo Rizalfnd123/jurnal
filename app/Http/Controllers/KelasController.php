@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,8 @@ class KelasController extends Controller
 {
     public function data()
     {
-        $kelas = DB::table('kelas')->get();
+        $kelas = Kelas::paginate(5); // Ambil 10 data per halaman
+
         return view('kelas.data', ['kelas' => $kelas]);
     }
     public function add()

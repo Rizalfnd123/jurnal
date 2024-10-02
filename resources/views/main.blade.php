@@ -85,7 +85,7 @@
             height: 50px;
             border-radius: inherit;
             scale: 0;
-            color: #91665a;
+            color: #91665a !important;
             z-index: -1;
             background-color: #91665a;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
@@ -106,68 +106,6 @@
         }
 
 
-
-        /* Style untuk form filter */
-        .filter-form {
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .filter-form .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .filter-form .form-control {
-            border-radius: 4px;
-            border-color: #ced4da;
-        }
-
-        .filter-form .form-control:focus {
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
-        }
-
-        .filter-form label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .filter-form .btn {
-            margin-top: 1rem;
-        }
-
-        .filter-form .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-
-        .filter-form .btn-success:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
-
-        /* Style untuk overlay loading */
-        #loading-overlay {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.8);
-            z-index: 9999;
-        }
-
-        /* Loader animation */
-        .loader {
-            border: 8px solid #f3f3f3;
-            /* Light grey */
-            border-top: 8px solid #3498db;
-            /* Blue */
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
 
 
         /* Atur warna sidebar menjadi coklat gelap */
@@ -192,27 +130,7 @@
             background-color: #6F4E37;
         }
 
-        #main-menu .navbar-nav {
-            background-color: #6F4E37;
-        }
 
-        /* Untuk dropdown menu Data Umum */
-        .menu-item-has-children .sub-menu {
-            background-color: #6F4E37 !important;
-            /* Warna hitam */
-            color: white !important;
-        }
-
-        .menu-item-has-children .sub-menu a {
-            color: white !important;
-            /* Warna teks putih */
-        }
-
-        .menu-item-has-children .sub-menu a:hover {
-            background-color: #6F4E37 !important;
-            /* Warna hitam keabu-abuan ketika hover */
-            color: #f8f9fa !important;
-        }
 
 
 
@@ -228,7 +146,7 @@
 
         /* Atur warna background pada panel kanan */
         #right-panel {
-            background-color: #ECB176 !important;
+            background-color: #c26732 !important;
             /* Coklat gelap */
             color: white;
             /* Warna teks agar kontras */
@@ -243,7 +161,7 @@
 
         /* Atur warna konten di dalam panel kanan */
         #right-panel .content {
-            background-color: #ECB176 !important;
+            background-color: #c26732 !important;
             /* Warna coklat medium untuk konten */
             color: white;
         }
@@ -259,19 +177,19 @@
         }
 
         .breadcrumbs {
-            background-color: #ECB176 !important;
+            background-color: #c26732 !important;
         }
 
         .breadcrumb {
-            background-color: #ECB176 !important;
+            background-color: #c26732 !important;
         }
 
         .page-header {
-            background-color: #ECB176 !important;
+            background-color: #c26732 !important;
         }
 
         .page-title {
-            background-color: #ECB176 !important;
+            background-color: #c26732 !important;
         }
 
         /* Menetapkan font untuk sidebar */
@@ -300,7 +218,7 @@
         }
 
         #bootstrap-data-table th {
-            background-color: #ECB176;
+            background-color: #c26732;
             /* Warna coklat untuk header tabel */
             color: white;
             /* Warna teks putih untuk kontras */
@@ -326,14 +244,14 @@
         }
 
         .btn-warning {
-            background-color: #ECB176;
+            background-color: #c26732;
             /* Warna latar belakang tombol */
-            border-color: #ECB176;
+            border-color: #c26732;
             /* Warna border tombol */
         }
 
         .btn-warning:hover {
-            background-color: #ECB176;
+            background-color: #c26732;
             /* Warna latar belakang tombol saat hover */
         }
 
@@ -362,6 +280,20 @@
         #left-panel:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             /* Shadow lebih dalam saat hover */
+        }
+
+        #main-menu {
+            background-color: #c26732 !important;
+        }
+
+        .text-white {
+            color: white;
+            /* Mengubah warna teks menjadi putih */
+        }
+
+        .sub-menu {
+            background-color: #b17d58 !important;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .header {
@@ -460,62 +392,119 @@
                 <a class="navbar-brand hidden" href=""></a>
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="{{ url('home') }}"> <i class="menu-icon fa fa-dashboard"></i>Home </a>
+            <div id="main-menu"
+                class="main-menu collapse navbar-collapse bg-amber-900 text-white shadow-lg rounded-md p-4">
+                <ul class="nav flex flex-col space-y-3">
+                    <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                        <a href="{{ url('home') }}" class="flex items-center space-x-2 text-white">
+                            <i class="menu-icon fa fa-dashboard"></i>
+                            <span>Home</span>
+                        </a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle teks-light" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-laptop teks-light"></i>Data Umum</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('mapel') }}">Data Mapel</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('kelas') }}">Data Kelas</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('jam') }}">Data Jam</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('tapel') }}">Data Tahun
-                                    Pelajaran</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('semester') }}">Data Semester</a>
+
+                    <li class="menu-item-has-children dropdown relative group">
+                        <a href="#" onclick="toggleDropdown(this)"
+                            class="flex items-center space-x-2 p-2 rounded hover:bg-amber-800 transition-colors duration-300 text-white">
+                            <i class="menu-icon fa fa-laptop"></i>
+                            <span>Data Umum</span>
+                        </a>
+                        <ul
+                            class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('mapel') }} "
+                                    class="text-white">Data Mapel</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('kelas') }}"class="text-white"> Data
+                                    Kelas</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('jam') }}"class="text-white"> Data
+                                    Jam</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('tapel') }}"class="text-white"> Data
+                                    Tahun
+                                    Pelajaran</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-puzzle-piece"></i><a
+                                    href="{{ url('semester') }}"class="text-white"> Data Semester</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{ url('guru') }}"> <i class="menu-icon fa fa-puzzle-piece"></i>Data Guru</a>
+
+
+                    <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                        <a href="{{ url('guru') }}" class="flex items-center space-x-2 text-white">
+                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <span>Data Guru</span>
+                        </a>
                     </li>
-                    <li>
-                        <a href="{{ url('siswas') }}"> <i class="menu-icon fa fa-puzzle-piece"></i>Data Siswa</a>
+
+                    <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                        <a href="{{ url('siswas') }}" class="flex items-center space-x-2 text-white">
+                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <span>Data Siswa</span>
+                        </a>
                     </li>
-                    <li>
-                        <a href="{{ url('mengajar') }}"> <i class="menu-icon fa fa-puzzle-piece"></i>Jadwal
-                            Mengajar</a>
+
+                    <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                        <a href="{{ url('mengajar') }}" class="flex items-center space-x-2 text-white">
+                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <span>Jadwal Mengajar</span>
+                        </a>
                     </li>
-                    <li>
-                        <a href="{{ url('jurnal') }}"> <i class="menu-icon fa fa-puzzle-piece"></i>Data Jurnal</a>
+
+                    <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                        <a href="{{ url('jurnal') }}" class="flex items-center space-x-2 text-white">
+                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <span>Data Jurnal</span>
+                        </a>
                     </li>
-                    <li>
-                        <a href="{{ url('izin') }}"> <i class="menu-icon fa fa-puzzle-piece"></i>Data Izin Guru</a>
+
+                    <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                        <a href="{{ url('izin') }}" class="flex items-center space-x-2 text-white">
+                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <span>Data Izin Guru</span>
+                        </a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Data Rekap</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('rkbm') }}">Rekap KBM</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('rjurnal') }}">Rekap Jurnal</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('rizin') }}">Rekap izin</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('rabsen') }}">Rekap Absensi</a>
+
+                    <li class="menu-item-has-children dropdown relative group">
+                        <a href="#" onclick="toggleDropdown(this)"
+                            class="flex items-center space-x-2 p-2 rounded hover:bg-amber-800 transition-colors duration-300 text-white">
+                            <i class="menu-icon fa fa-laptop"></i>
+                            <span>Data Rekap</span>
+                        </a>
+                        <ul
+                            class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
+                                    class="fa fa-puzzle-piece"></i><a
+                                    href="{{ url('rkbm') }}"class="text-white">Rekap KBM</a></li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
+                                    class="fa fa-puzzle-piece"></i><a
+                                    href="{{ url('rjurnal') }}"class="text-white">Rekap Jurnal</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
+                                    class="fa fa-puzzle-piece"></i><a
+                                    href="{{ url('rizin') }}"class="text-white">Rekap Izin</a></li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
+                                    class="fa fa-puzzle-piece"></i><a
+                                    href="{{ url('rabsen') }}"class="text-white">Rekap Absensi</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
+            </div>
 
-            </div><!-- /.navbar-collapse -->
         </nav>
     </aside><!-- /#left-panel -->
 
-    <div id="right-panel" class="right-panel">
+    <div id="right-panel" class="right-panel ">
         <header id="header" class="header">
             <div class="header-menu">
                 <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left bg-secondary"><i class="fa fa fa-tasks "></i></a>
+                    {{-- <a id="menuToggle" class="menutoggle pull-left bg-secondary"><i class="fa fa fa-tasks "></i></a> --}}
                     <div class="header-left">
                         {{-- <button class="search-trigger"><i class="fa fa-search"></i></button> --}}
                         <div class="form-inline">
@@ -611,6 +600,14 @@
             loadingOverlay.style.display = "none";
         }
     });
+
+    function toggleDropdown(element) {
+        // Dapatkan elemen dropdown (ul) yang bersifat saudara (sibling) dari elemen <a>
+        const dropdown = element.nextElementSibling;
+
+        // Toggle class hidden untuk menampilkan/menyembunyikan dropdown
+        dropdown.classList.toggle('hidden');
+    }
 </script>
 
 </script>

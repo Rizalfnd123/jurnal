@@ -28,9 +28,9 @@
 
         <div class="animated fadeIn">
             <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong>buat Data</strong>
+                <div class="card-header" style="background-color: #F5DEB3; border-radius: 14px">
+                    <div class="pull-left mt-1">
+                        <strong>Buat Data</strong>
                     </div>
                     <div class="pull-right">
                         <a href="{{ url('mengajar') }}" class="btn btn-danger btn-sm">
@@ -38,72 +38,95 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="col-md-4 offset-md-4">
+                <div class="card-body" style="background-color: #ffffff;"> <!-- Warna coklat muda -->
+                    <div class="col-md-8 offset-md-2">
                         <form action="{{ url('mengajar') }}" method="post">
                             @csrf
-                            <div class="form-group">
-                                <label>Hari</label>
-                                <input type="text" name="hari" class="form-control" autofocus required>
-                                <div class="form-group"><br>
-                                    <label>Waktu</label>
-                                    <select type="text" name="jam_id" class="form-control"required>
-                                        <option value="">-- pilih --</option>
-                                        @foreach ($jam as $item)
-                                            <option value="{{ $item->id }}">{{ $item->jam }}</option>
-                                        @endforeach
-                                    </select>
+                            <div class="row">
+                                <!-- Kolom Kiri -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Hari</label> <!-- Warna coklat tua -->
+                                        <select name="hari" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required> <!-- Background coklat muda, teks coklat tua -->
+                                            <option value="">-- Pilih Hari --</option>
+                                            <option value="Senin">Senin</option>
+                                            <option value="Selasa">Selasa</option>
+                                            <option value="Rabu">Rabu</option>
+                                            <option value="Kamis">Kamis</option>
+                                            <option value="Jumat">Jumat</option>
+                                            <option value="Sabtu">Sabtu</option>
+                                            <option value="Minggu">Minggu</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Waktu</label>
+                                        <select name="jam_id" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required>
+                                            <option value="">-- pilih --</option>
+                                            @foreach ($jam as $item)
+                                                <option value="{{ $item->id }}">{{ $item->jam }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Kelas</label>
+                                        <select name="kelas_id" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required>
+                                            <option value="">-- pilih --</option>
+                                            @foreach ($kelas as $item)
+                                                <option value="{{ $item->id }}">{{ $item->kelas }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Mata Pelajaran</label>
+                                        <select name="mapel_id" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required>
+                                            <option value="">-- pilih --</option>
+                                            @foreach ($mapel as $item)
+                                                <option value="{{ $item->id }}">{{ $item->mapel }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Kelas</label>
-                                    <select type="text" name="kelas_id" class="form-control"required>
-                                        <option value="">-- pilih --</option>
-                                        @foreach ($kelas as $item)
-                                            <option value="{{ $item->id }}">{{ $item->kelas }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Mata Pelajaran</label>
-                                    <select type="text" name="mapel_id" class="form-control"required>
-                                        <option value="">-- pilih --</option>
-                                        @foreach ($mapel as $item)
-                                            <option value="{{ $item->id }}">{{ $item->mapel }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Semester</label>
-                                    <select type="text" name="semester_id" class="form-control"required>
-                                        <option value="">-- pilih --</option>
-                                        @foreach ($semester as $item)
-                                            <option value="{{ $item->id }}">{{ $item->semester }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tahun Pelajaran</label>
-                                    <select type="text" name="tapel_id" class="form-control"required>
-                                        <option value="">-- pilih --</option>
-                                        @foreach ($tapel as $item)
-                                            <option value="{{ $item->id }}">{{ $item->tapel }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Guru</label>
-                                    <select type="text" name="guru_id" class="form-control"required>
-                                        <option value="">-- pilih --</option>
-                                        @foreach ($guru as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                        @endforeach
-                                    </select>
+                
+                                <!-- Kolom Kanan -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Semester</label>
+                                        <select name="semester_id" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required>
+                                            <option value="">-- pilih --</option>
+                                            @foreach ($semester as $item)
+                                                <option value="{{ $item->id }}">{{ $item->semester }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Tahun Pelajaran</label>
+                                        <select name="tapel_id" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required>
+                                            <option value="">-- pilih --</option>
+                                            @foreach ($tapel as $item)
+                                                <option value="{{ $item->id }}">{{ $item->tapel }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: #8B4513;">Guru</label>
+                                        <select name="guru_id" class="form-control" style="background-color: #F5DEB3; color: #8B4513;" required>
+                                            <option value="">-- pilih --</option>
+                                            @foreach ($guru as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-12 d-flex justify-content-start">
+                                        <button type="submit" class="btn btn-success" style="background-color: #8B4513; border-color: #8B4513;">Simpan</button>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                
                         </form>
                     </div>
                 </div>
+                
             </div>
 
         </div>

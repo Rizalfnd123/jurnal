@@ -39,7 +39,7 @@
                     </div>
                     <div class="pull-right">
                         <a href="{{ url('mengajar/create') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i>Tambah
+                            <i class="fa fa-plus"></i> Tambah
                         </a>
                     </div>
                 </div>
@@ -70,14 +70,14 @@
                                             <i class="fa fa-eye"></i> Lihat
                                         </a> --}}
                                         <a href="{{ url('mengajar/' . $item->id . '/edit') }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> Edit
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('mengajar/' . $item->id) }}" method="post" class="d-inline"
                                             onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
