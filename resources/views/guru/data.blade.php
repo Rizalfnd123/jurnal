@@ -15,7 +15,7 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
+                        <li class="active"><i class="fa fa-user"></i></li>
                     </ol>
                 </div>
             </div>
@@ -34,15 +34,30 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Data Guru</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('guru/add') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i> Tambah
-                        </a>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong class="mr-3">Data Guru</strong>
+                            
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <form action="{{ route('guru.import') }}" method="POST" enctype="multipart/form-data"
+                                style="">
+                                @csrf
+                                <div class="custom-file " style="width: auto; margin-right: 2px">
+                                    <input type="file" name="file" class="custom-file-input" id="customFile" placeholder="import dari excel">
+                                    <label class="custom-file-label" for="customFile">Pilih file</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm mt-1" style="">
+                                    <i class="fa fa-upload"></i> Import
+                                </button>
+                                <a href="{{ url('guru/add') }}" class="btn btn-success btn-sm text-right mt-1">
+                                    <i class="fa fa-plus"></i> Tambah
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
                 <div class="card-body table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -66,7 +81,7 @@
                                     <td>{{ $item->kelamin }}</td>
                                     <td>{{ $item->username }}</td>
                                     <td>{{ $item->password }}</td>
-                                    <td><img src="{{ asset('images/'.$item->foto) }}" alt="" width="100">
+                                    <td><img src="{{ asset('images/' . $item->foto) }}" alt="" width="100">
                                     </td>
                                     <td>
                                         <a href="{{ url('guru/edit/' . $item->id) }}" class="btn btn-primary">
@@ -85,6 +100,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="">
+                        <div>{{ $guru->links() }}</div>
+                    </div>
                 </div>
             </div>
 

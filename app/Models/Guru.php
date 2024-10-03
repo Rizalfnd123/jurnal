@@ -9,4 +9,10 @@ class Guru extends Model
 {
     use HasFactory;
     protected $table = 'guru';
+    protected $fillable = [
+        'nip',
+        'nama',
+        'kelamin',
+        // Tambahkan kolom lain jika diperlukan
+    ];
 }

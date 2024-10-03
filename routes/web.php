@@ -13,7 +13,10 @@ use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\JadwalhariController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\SesiController;
+
+Route::post('guru/import', [GuruController::class, 'import'])->name('guru.import');
 
 Route::get('siswas/import', [SiswaController::class, 'import'])->name('siswas.import');
 Route::post('siswas/import', [SiswaController::class, 'importPost'])->name('siswas.import.post');

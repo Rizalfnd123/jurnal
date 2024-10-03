@@ -397,7 +397,7 @@
                 <ul class="nav flex flex-col space-y-3">
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('home') }}" class="flex items-center space-x-2 text-white">
-                            <i class="menu-icon fa fa-dashboard"></i>
+                            <i class="menu-icon fa fa-house"></i>
                             <span>Home</span>
                         </a>
                     </li>
@@ -411,25 +411,24 @@
                         <ul
                             class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('mapel') }} "
-                                    class="text-white">Data Mapel</a>
+                                <i class="fa fa-folder mr-2"></i><a href="{{ url('mapel') }} " class="text-white">Mata Pelajaran</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('kelas') }}"class="text-white"> Data
+                                <i class="fa fa-folder"></i><a href="{{ url('kelas') }}"class="text-white">
                                     Kelas</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('jam') }}"class="text-white"> Data
+                                <i class="fa fa-folder"></i><a href="{{ url('jam') }}"class="text-white">
                                     Jam</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-puzzle-piece"></i><a href="{{ url('tapel') }}"class="text-white"> Data
+                                <i class="fa fa-folder"></i><a href="{{ url('tapel') }}"class="text-white">
                                     Tahun
-                                    Pelajaran</a>
+                                    Ajaran</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-puzzle-piece"></i><a
-                                    href="{{ url('semester') }}"class="text-white"> Data Semester</a>
+                                <i class="fa fa-folder"></i><a href="{{ url('semester') }}"class="text-white">
+                                    Semester</a>
                             </li>
                         </ul>
                     </li>
@@ -437,35 +436,35 @@
 
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('guru') }}" class="flex items-center space-x-2 text-white">
-                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <i class="menu-icon fa fa-user"></i>
                             <span>Data Guru</span>
                         </a>
                     </li>
 
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('siswas') }}" class="flex items-center space-x-2 text-white">
-                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <i class="menu-icon fa fa-user"></i>
                             <span>Data Siswa</span>
                         </a>
                     </li>
 
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('mengajar') }}" class="flex items-center space-x-2 text-white">
-                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <i class="menu-icon fa fa-bars"></i>
                             <span>Jadwal Mengajar</span>
                         </a>
                     </li>
 
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('jurnal') }}" class="flex items-center space-x-2 text-white">
-                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <i class="menu-icon fa fa-book"></i>
                             <span>Data Jurnal</span>
                         </a>
                     </li>
 
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('izin') }}" class="flex items-center space-x-2 text-white">
-                            <i class="menu-icon fa fa-puzzle-piece"></i>
+                            <i class="menu-icon fa fa-circle-info"></i>
                             <span>Data Izin Guru</span>
                         </a>
                     </li>
@@ -473,24 +472,24 @@
                     <li class="menu-item-has-children dropdown relative group">
                         <a href="#" onclick="toggleDropdown(this)"
                             class="flex items-center space-x-2 p-2 rounded hover:bg-amber-800 transition-colors duration-300 text-white">
-                            <i class="menu-icon fa fa-laptop"></i>
+                            <i class="menu-icon fa fa-folder-open"></i>
                             <span>Data Rekap</span>
                         </a>
                         <ul
                             class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-puzzle-piece"></i><a
-                                    href="{{ url('rkbm') }}"class="text-white">Rekap KBM</a></li>
+                                    class="fa fa-file"></i><a href="{{ url('rkbm') }}"class="text-white"> Rekap
+                                    KBM</a></li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-puzzle-piece"></i><a
-                                    href="{{ url('rjurnal') }}"class="text-white">Rekap Jurnal</a>
+                                    class="fa fa-file"></i><a href="{{ url('rjurnal') }}"class="text-white"> Rekap
+                                    Jurnal</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-puzzle-piece"></i><a
-                                    href="{{ url('rizin') }}"class="text-white">Rekap Izin</a></li>
+                                    class="fa fa-file"></i><a href="{{ url('rizin') }}"class="text-white"> Rekap
+                                    Izin</a></li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-puzzle-piece"></i><a
-                                    href="{{ url('rabsen') }}"class="text-white">Rekap Absensi</a>
+                                    class="fa fa-file"></i><a href="{{ url('rabsen') }}"class="text-white"> Rekap
+                                    Absensi</a>
                             </li>
                         </ul>
                     </li>
