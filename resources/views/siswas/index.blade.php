@@ -69,13 +69,13 @@
                                     <td>{{ $item->status }}</td>
                                     <td>
                                         <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> Edit
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('siswas/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
@@ -83,6 +83,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <!-- Pagination links -->
+                <div class="">
+                    <div>{{ $siswas->links() }}</div>
+                </div>
                 </div>
             </div>
         </div>
