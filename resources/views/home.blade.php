@@ -15,7 +15,7 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
+                        <li class="active"><i class="fa fa-home"></i></li>
                     </ol>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <div class="card-body rounded-xl">
                         <a href="{{ url('/home') }}">
                             <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-menu-alt text-warning border-warning" text-warning
+                                <div class="stat-icon dib"><i class="ti-book text-warning border-warning" text-warning
                                         border-danger"></i></div>
                                 <div class="stat-content dib">
                                     <div class="stat-text"><strong>Jurnal hari ini</strong></div>
@@ -48,7 +48,7 @@
                     <div class="card-body rounded-xl">
                         <a href="{{ url('/homeizin') }}">
                             <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-menu-alt text-warning border-warning"></i></div>
+                                <div class="stat-icon dib"><i class="ti-info text-warning border-warning"></i></div>
                                 <div class="stat-content dib">
                                     <div class="stat-text"><strong>Izin hari ini</strong></div>
                                     <div class="stat-digit">{{ $izinTodayCount }}</div>
@@ -78,7 +78,7 @@
                     <div class="card-body">
                         <a href="{{ url('/home') }}">
                             <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-menu-alt text-warning border-warning"></i></div>
+                                <div class="stat-icon dib"><i class="ti-folder text-warning border-warning"></i></div>
                                 <div class="stat-content dib">
                                     <div class="stat-text"><strong>Rekap hari ini</strong></div>
                                     <div class="stat-digit">{{ $jurnalTodayCount }}</div>

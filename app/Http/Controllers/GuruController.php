@@ -12,11 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class GuruController extends Controller
 {
-    public function data()
+    public function data(Request $request)
     {
-        $guru = DB::table('guru')->paginate(5);
+        $perPage = $request->get('perPage', 5); // Default to 5 if not set
+        $guru = DB::table('guru')->paginate($perPage);
         return view('guru.data', ['guru' => $guru]);
     }
+
     public function add()
     {
         $guru = DB::table('guru')->get();
@@ -99,5 +101,12 @@ class GuruController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('status', 'Data Guru berhasil diimport!');
+    }
+    public function search(Request $request)
+    {
+        $search = $request->input('term');
+        $guru = Guru::where('nama', 'LIKE', '%' . $search . '%')->get();
+
+        return response()->json($guru);
     }
 }

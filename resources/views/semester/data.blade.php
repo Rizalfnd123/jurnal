@@ -15,7 +15,7 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
+                        <li class="active"><i class="fa fa-folder"></i></li>
                     </ol>
                 </div>
             </div>
@@ -34,23 +34,21 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Data semester</strong>
-                    </div>
+                    <strong class="card-title">Data Semester</strong>
                     <div class="pull-right">
                         <a href="{{ url('semester/add') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i>Tambah
+                            <i class="fa fa-plus"></i> Tambah
                         </a>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
                             <tr>
-                                <th>No</th>
-                            <th>Semester</th>
-                            <th>Status</th>
-                                <th>Aksi</th>
+                                <th style="width: 50px;">No</th> <!-- Lebar kolom No -->
+                                <th>Semester</th>
+                                <th>Status</th>
+                                <th style="width: 80px;">Aksi</th> <!-- Lebar kolom Aksi -->
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -58,16 +56,20 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->semester }}</td>
-                                    <td>{{ $item->status }}</td>
                                     <td>
-                                        <a href="{{ url('semester/edit/' . $item->id) }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> Edit
+                                        <span class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
+                                            {{ $item->status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('semester/edit/' . $item->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('semester/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i> 
                                             </button>
                                         </form>
                                     </td>
@@ -77,6 +79,7 @@
                     </table>
                 </div>
             </div>
+            
 
         </div>
 

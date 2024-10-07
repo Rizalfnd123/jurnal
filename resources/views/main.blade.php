@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('style/assets/css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/font-awesome.min.css') }}">
@@ -26,10 +27,67 @@
 
     <!-- DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        /* Style umum form */
+        .form-control {
+            background-color: #F5DEB3;
+            /* Background coklat muda */
+            color: #8B4513;
+            /* Teks coklat tua */
+        }
+
+        /* Style select2 dropdown */
+        .select2-container--default .select2-selection--multiple {
+            background-color: #F5DEB3;
+            border: 1px solid #8B4513;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #8B4513;
+            /* Background pilihan yang dipilih */
+            color: #ffffff;
+            /* Teks putih untuk pilihan yang dipilih */
+            border-radius: 4px;
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #CD853F;
+            /* Warna pilihan yang disorot */
+            color: white;
+        }
+
+        /* Mengatur hover dan fokus */
+        .form-control:hover,
+        .form-control:focus {
+            border-color: #8B4513;
+            /* Warna border saat fokus */
+            box-shadow: none;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #F5DEB3 !important;
+            color: #8B4513 !important;
+            border: 1px solid #F5DEB3;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #8B4513 !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            color: #8B4513 !important;
+        }
+
         body,
         .sidebar {
             font-family: 'Poppins', sans-serif;
@@ -48,11 +106,37 @@
             /* Menambahkan bayangan jika diinginkan */
         }
 
+        .badge {
+            padding: 0.4em 0.6em;
+            /* Atur padding sesuai kebutuhan */
+            font-size: 0.9em;
+            /* Ukuran font */
+            color: white;
+            /* Warna teks */
+        }
 
         .card,
         .table {
+            border-radius: 0.5rem;
+            /* Atur radius sesuai keinginan */
             border-radius: 15px;
+            overflow: hidden;
+            /* Pastikan border-radius berfungsi */
             /* Membuat sudut rounded */
+        }
+
+        .table th {
+            text-align: center;
+            /* Memusatkan teks di header */
+        }
+
+        .table td {
+            white-space: nowrap;
+            /* Mencegah teks membungkus ke baris berikutnya */
+            overflow: hidden;
+            /* Menyembunyikan teks yang melebihi lebar */
+            text-overflow: ellipsis;
+            /* Menambahkan elipsis (...) untuk teks yang terpotong */
         }
 
         .btn {
@@ -107,6 +191,18 @@
 
 
 
+        .table-coklat {
+            /* Coklat Muda */
+            color: white;
+            /* Teks berwarna putih */
+        }
+
+        .table-coklat th {
+            background-color: #6F4E37;
+            /* Coklat Tua untuk header */
+            color: white;
+            /* Teks berwarna putih untuk header */
+        }
 
         /* Atur warna sidebar menjadi coklat gelap */
         #left-panel {
@@ -411,7 +507,8 @@
                         <ul
                             class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-folder mr-2"></i><a href="{{ url('mapel') }} " class="text-white">Mata Pelajaran</a>
+                                <i class="fa fa-folder mr-2"></i><a href="{{ url('mapel') }} " class="text-white">Mata
+                                    Pelajaran</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                                 <i class="fa fa-folder"></i><a href="{{ url('kelas') }}"class="text-white">
@@ -589,7 +686,7 @@
 
 
     </div>
-
+    @yield('scripts')
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -600,15 +697,112 @@
         }
     });
 
-    function toggleDropdown(element) {
-        // Dapatkan elemen dropdown (ul) yang bersifat saudara (sibling) dari elemen <a>
-        const dropdown = element.nextElementSibling;
+    $(document).ready(function() {
+        // Fungsi untuk membuka modal dan mengisi data form
+        $('.btn-edit').on('click', function() {
+            // Mengambil data dari atribut data- di tombol edit
+            let id = $(this).data('id');
+            let hari = $(this).data('hari');
+            let jam_id = $(this).data('jam_id');
+            let jamselesai_id = $(this).data('jamselesai_id');
+            let kelas_id = $(this).data('kelas_id');
+            let mapel_id = $(this).data('mapel_id');
+            let semester_id = $(this).data('semester_id');
+            let tapel_id = $(this).data('tapel_id');
+            let guru_id = $(this).data('guru_id');
 
-        // Toggle class hidden untuk menampilkan/menyembunyikan dropdown
-        dropdown.classList.toggle('hidden');
-    }
-</script>
+            // Mengisi form di modal dengan data yang diambil
+            $('#editForm').attr('action', '/mengajar/' + id); // Set form action URL
+            $('#hari').val(hari);
+            $('#jam_id').val(jam_id);
+            $('#jamselesai_id').val(jamselesai_id);
+            $('#kelas_id').val(kelas_id);
+            $('#mapel_id').val(mapel_id);
+            $('#semester_id').val(semester_id);
+            $('#tapel_id').val(tapel_id);
+            $('#guru_id').val(guru_id);
 
+            // Membuka modal edit
+            $('#editModal').modal('show');
+        });
+
+        // Optional: Inisialisasi Select2 jika digunakan untuk select box dengan search real-time
+        $('.select2-kelas, .select2-mapel, .select2-guru').select2({
+            theme: 'bootstrap4',
+            width: '100%',
+            placeholder: '-- pilih --'
+        });
+    });
+
+
+
+    $(document).ready(function() {
+        // Select2 untuk Kelas
+        $('.select2-kelas').select2({
+            placeholder: "-- pilih --",
+            allowClear: true,
+            ajax: {
+                url: '/search-kelas',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.kelas,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        // Select2 untuk Mata Pelajaran
+        $('.select2-mapel').select2({
+            placeholder: "-- pilih --",
+            allowClear: true,
+            ajax: {
+                url: '/search-mapel',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.mapel,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        // Select2 untuk Guru
+        $('.select2-guru').select2({
+            placeholder: "-- pilih --",
+            allowClear: true,
+            ajax: {
+                url: '/search-guru',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.nama,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    });
 </script>
 
 </html>

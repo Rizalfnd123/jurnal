@@ -29,20 +29,33 @@ class KelasController extends Controller
     }
     public function edit($id)
     {
-        $kelas=DB::table('kelas')->where('id',$id)->first();
-        return view('kelas.edit', ['kelas' =>$kelas]);
+        $kelas = DB::table('kelas')->where('id', $id)->first();
+        return view('kelas.edit', ['kelas' => $kelas]);
     }
-    public function editprocess(Request $request,$id)
+    public function editprocess(Request $request, $id)
     {
-        DB::table('kelas')->where('id',$id)
-        ->update([
-            'kelas' => $request->kelas
-        ]);
+        DB::table('kelas')->where('id', $id)
+            ->update([
+                'kelas' => $request->kelas
+            ]);
         return redirect('kelas')->with('status', 'kelas berhasil diubah');
     }
     public function delete($id)
     {
-        DB::table('kelas')->where('id',$id)->delete();
+        DB::table('kelas')->where('id', $id)->delete();
         return redirect('kelas')->with('status', 'kelas berhasil dihapus');
     }
+    public function search(Request $request)
+    {
+        $search = $request->input('term');
+        $kelas = Kelas::where('kelas', 'LIKE', '%' . $search . '%')->get();
+
+        return response()->json($kelas);
+    }
+    public function getKelasByTapel($tapel_id)
+{
+    $kelas = Kelas::where('tapel_id', $tapel_id)->pluck('nama_kelas', 'id');
+    return response()->json($kelas);
+}
+
 }

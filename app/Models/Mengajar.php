@@ -8,23 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Mengajar extends Model
 {
      protected $guarded = [];
-     public function kelas()
-     {
-         return $this->belongsTo(Kelas::class, 'kelas_id');
-     }
-     
-     public function jam()
-     {
-          return $this->belongsTo('App\Models\Jam');
-     }
-     public function mapel()
-     {
-          return $this->belongsTo('App\Models\Mapel');
-     }
-     public function guru()
-     {
-          return $this->belongsTo('App\Models\Guru');
-     }
+     public function jam() {
+          return $this->belongsTo(Jam::class);
+      }
+      
+      public function jamselesai() {
+          return $this->belongsTo(Jam::class, 'jamselesai_id');
+      }
+      
+      public function kelas() {
+          return $this->belongsTo(Kelas::class);
+      }
+      
+      public function mapel() {
+          return $this->belongsTo(Mapel::class);
+      }
+      
+      public function guru() {
+          return $this->belongsTo(Guru::class);
+      }
+      
      public function semester()
      {
           return $this->belongsTo('App\Models\Semester');

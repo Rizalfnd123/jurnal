@@ -15,7 +15,7 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
+                        <li class="active"><i class="fa fa-folder"></i></li>
                     </ol>
                 </div>
             </div>
@@ -34,9 +34,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Data Mapel</strong>
-                    </div>
+                    <strong class="card-title">Data Mapel</strong>
                     <div class="pull-right">
                         <a href="{{ url('mapel/add') }}" class="btn btn-success btn-sm">
                             <i class="fa fa-plus"></i> Tambah
@@ -47,25 +45,25 @@
                     <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Mapel</th>
-                                <th>Aksi</th>
+                                <th style="width: 50px;">No</th> <!-- Lebar kolom No -->
+                                <th style="width: 200px;">Mapel</th> <!-- Lebar kolom Mapel -->
+                                <th style="width: 80px;">Aksi</th> <!-- Lebar kolom Aksi -->
                             </tr>
                         </thead>
-                        <tbody class="table-group-divider">
+                        <tbody>
                             @foreach ($mapel as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->mapel }}</td>
                                     <td>
-                                        <a href="{{ url('mapel/edit/' . $item->id) }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> EDIT
+                                        <a href="{{ url('mapel/edit/' . $item->id) }}" class="btn btn-primary rounded btn-sm">
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('mapel/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> hapus</i>
+                                            <button class="btn btn-danger rounded btn-sm">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
@@ -75,6 +73,7 @@
                     </table>
                 </div>
             </div>
+            
 
         </div>
 

@@ -14,7 +14,20 @@ use App\Http\Controllers\IzinController;
 use App\Http\Controllers\JadwalhariController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MapelController;
+use App\Http\Controllers\MengajarController;
 use App\Http\Controllers\SesiController;
+
+Route::get('/getKelas/{tapel_id}', [KelasController::class, 'getKelasByTapel']);
+
+Route::put('mengajar/update', [MengajarController::class, 'update'])->name('mengajar.update');
+
+Route::get('/search-kelas', [KelasController::class, 'search']);
+Route::get('/search-mapel', [MapelController::class, 'search']);
+Route::get('/search-guru', [GuruController::class, 'search']);
+
+Route::get('guru/data', [GuruController::class, 'data'])->name('guru.data');
 
 Route::post('guru/import', [GuruController::class, 'import'])->name('guru.import');
 

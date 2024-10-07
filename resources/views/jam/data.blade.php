@@ -34,38 +34,36 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Data Jam</strong>
-                    </div>
+                    <strong class="card-title">Data Jam</strong>
                     <div class="pull-right">
                         <a href="{{ url('jam/add') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i>Tambah
+                            <i class="fa fa-plus"></i> Tambah
                         </a>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
                             <tr>
-                                <th>No</th>
-                            <th>Jam</th>
-                                <th>Aksi</th>
+                                <th style="width: 50px;">No</th> <!-- Lebar kolom No -->
+                                <th style="width: 200px;">Jam</th> <!-- Lebar kolom Jam -->
+                                <th style="width: 80px;">Aksi</th> <!-- Lebar kolom Aksi -->
                             </tr>
                         </thead>
-                        <tbody class="table-group-divider">
+                        <tbody>
                             @foreach ($jam as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->jam }}</td>
                                     <td>
-                                        <a href="{{ url('jam/edit/' . $item->id) }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> Edit
+                                        <a href="{{ url('jam/edit/' . $item->id) }}" class="btn btn-primary rounded btn-sm">
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('jam/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                            <button class="btn btn-danger rounded btn-sm">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
@@ -75,6 +73,8 @@
                     </table>
                 </div>
             </div>
+            
+            
 
         </div>
 

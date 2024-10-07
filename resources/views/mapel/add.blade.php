@@ -15,7 +15,7 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
+                        <li class="active"><i class="fa fa-folder"></i></li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="pull-right">
                         <a href="{{ url('mapel') }}" class="btn btn-danger btn-sm">
-                            <i class="fa fa-undo"></i>Kembali
+                            <i class="fa fa-undo"></i> Kembali
                         </a>
                     </div>
                 </div>

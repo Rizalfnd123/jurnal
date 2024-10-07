@@ -34,11 +34,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="pull-left">
-                        <strong>Data Siswa</strong>
+                        <strong class="card-title">Data Siswa</strong>
                     </div>
                     <div class="pull-right">
                         <a href="{{ url('siswas/create') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i>Tambah
+                            <i class="fa fa-plus"></i> Tambah
                         </a>
                         <a href="{{ route('siswas.import') }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-upload"></i> Import
@@ -46,16 +46,16 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
-                            <tr>
-                                <th>No</th>
+                            <tr style="background-color: #a0522d; padding: 10px; border-radius: 5px;">
+                                <th style="width: 50px;">No</th>
                                 <th>NIS</th>
                                 <th>Nama</th>
                                 <th>L/P</th>
                                 <th>Kelas</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
+                                <th style="width: 80px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -66,15 +66,19 @@
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->kelamin }}</td>
                                     <td>{{ $item->kelas->kelas }}</td>
-                                    <td>{{ $item->status }}</td>
                                     <td>
-                                        <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="btn btn-primary">
+                                        <span class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
+                                            {{ $item->status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('siswas/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger -sm">
+                                            <button class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -83,12 +87,16 @@
                             @endforeach
                         </tbody>
                     </table>
+            
                     <!-- Pagination links -->
-                <div class="">
-                    <div>{{ $siswas->links() }}</div>
-                </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <div class="pagination-container" >
+                            {{ $siswas->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
     </div>
 @endsection
