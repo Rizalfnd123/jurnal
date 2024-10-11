@@ -1,138 +1,106 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs mt-2">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Dashboard {{ Auth::user()->name }}</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-home"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+    <div class="bg-amber-900 mb-4">
+        <h3 class="text-3xl font-bold text-white">Dashboard {{ Auth::user()->name }}</h3>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="card rounded-m">
-                    <div class="card-body rounded-xl">
-                        <a href="{{ url('/home') }}">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-book text-warning border-warning" text-warning
-                                        border-danger"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text"><strong>Jurnal hari ini</strong></div>
-                                    <div class="stat-digit">{{ $jurnalTodayCount }}</div>
-                                </div>
-                            </div>
-                        </a>
+    <div class="w-full px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <a href="{{ url('/home') }}">
+                    <div class="flex items-center">
+                        <div class="text-amber-900 text-5xl">
+                            <i class="fas fa-book"></i> <!-- Ikon Jurnal -->
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-gray-700 font-semibold">Jurnal hari ini</div>
+                            <div class="text-5xl font-bold">{{ $jurnalTodayCount }}</div>
+                        </div>
                     </div>
-                </div>
+                </a>
+            </div>
 
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="card rounded-sm">
-                    <div class="card-body rounded-xl">
-                        <a href="{{ url('/homeizin') }}">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-info text-warning border-warning"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text"><strong>Izin hari ini</strong></div>
-                                    <div class="stat-digit">{{ $izinTodayCount }}</div>
-                                </div>
-                            </div>
-                        </a>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <a href="{{ url('/homeizin') }}">
+                    <div class="flex items-center">
+                        <div class="text-amber-900 text-5xl">
+                            <i class="fas fa-info-circle"></i> <!-- Ikon Izin -->
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-gray-700 font-semibold">Izin hari ini</div>
+                            <div class="text-3xl font-bold">{{ $izinTodayCount }}</div>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{{ url('/homejad') }}">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-menu-alt text-warning border-warning"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text"><strong>Jadwal hari ini</strong></div>
-                                    <div class="stat-digit">{{ $jadwalTodayCount }}</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{{ url('/home') }}">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-folder text-warning border-warning"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text"><strong>Rekap hari ini</strong></div>
-                                    <div class="stat-digit">{{ $jurnalTodayCount }}</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Data Jurnal</strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Guru</th>
-                                            <th>Kelas</th>
-                                            <th>Mata Pelajaran</th>
-                                            <th>Waktu isi</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($jurnalToday as $item)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->guru->nama }}</td>
-                                                <td>{{ $item->kelas->kelas }}</td>
-                                                <td>{{ $item->mapel->mapel }}</td>
-                                                <td>{{ $item->updated_at }}</td>
-                                                <td>
-                                                    <a href="{{ url('jurnal/' . $item->id) }}"
-                                                        class="btn btn-warning rounded">
-                                                        <i class="fa fa-eye"></i> Lihat
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
 
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <a href="{{ url('/homejad') }}">
+                    <div class="flex items-center">
+                        <div class="text-amber-900 text-5xl">
+                            <i class="fas fa-calendar-alt"></i> <!-- Ikon Jadwal -->
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-gray-700 font-semibold">Jadwal hari ini</div>
+                            <div class="text-3xl font-bold">{{ $jadwalTodayCount }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <a href="{{ url('/home') }}">
+                    <div class="flex items-center">
+                        <div class="text-amber-900 text-5xl">
+                            <i class="fas fa-folder"></i> <!-- Ikon Rekap -->
+                        </div>
+                        <div class="ml-4 flex flex-col">
+                            <div class="flex items-center">
+                                <div class="text-gray-700 font-semibold">Rekap hari ini</div>
+                                <div class="text-amber-500 text-3xl ml-2">
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold flex items-center">
+                                <div class="text-amber-500 text-3xl">
+                                </div>
+                                <span class="ml-2">{{ $jurnalTodayCount }}</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- .animated -->
+                </a>
+            </div>
         </div>
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+            <div class="text-xl font-semibold mb-4">Data Jurnal</div>
+            <!-- Membuat tabel responsif dengan overflow-x-auto -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg">
+                    <thead>
+                        <tr class="bg-amber-900 text-white uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Nama Guru</th>
+                            <th class="py-3 px-6 text-left">Kelas</th>
+                            <th class="py-3 px-6 text-left">Mata Pelajaran</th>
+                            <th class="py-3 px-6 text-left">Waktu isi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        @foreach ($jurnalToday as $item)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left">{{ $item->guru->nama }}</td>
+                                <td class="py-3 px-6 text-left">{{ $item->kelas->kelas }}</td>
+                                <td class="py-3 px-6 text-left">{{ $item->mapel->mapel }}</td>
+                                <td class="py-3 px-6 text-left">{{ $item->updated_at }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 @endsection

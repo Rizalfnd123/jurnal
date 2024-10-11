@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))
@@ -59,7 +50,8 @@
                                         <a href="{{ url('jam/edit/' . $item->id) }}" class="btn btn-primary rounded btn-sm">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form action="{{ url('jam/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
+                                        <form action="{{ url('jam/' . $item->id) }}" method="post" class="d-inline"
+                                            onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger rounded btn-sm">
@@ -73,8 +65,8 @@
                     </table>
                 </div>
             </div>
-            
-            
+
+
 
         </div>
 

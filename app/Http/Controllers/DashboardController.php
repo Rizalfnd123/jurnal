@@ -4,30 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Jurnal; // Pastikan model Jurnal sudah ada
-use App\Models\Mengajar; 
-use App\Models\Izin; 
+use App\Models\Mengajar;
+use App\Models\Izin;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('login');
     }
     public function index()
     {
         // Ambil data jurnal hari ini
         $today = Carbon::today();
+        $jadtoday = Carbon::now()->isoFormat('dddd');
         $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
-        $jadwalToday = Mengajar::whereDate('created_at', $today)->get();
+        // Ambil data jadwal berdasarkan hari ini
+        $jadwalToday = Mengajar::where('hari', $jadtoday)->get();
         $izinToday = Izin::whereDate('created_at', $today)->get();
-        
+
         // Hitung jumlah jurnal hari ini
         $jurnalTodayCount = $jurnalToday->count();
         $jadwalTodayCount = $jadwalToday->count();
         $izinTodayCount = $izinToday->count();
 
         // Kirim data ke view
-        return view('home', compact('jurnalToday', 'jurnalTodayCount','jadwalToday', 'jadwalTodayCount','izinToday','izinTodayCount'));
+        return view('home', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
     }
     public function indexguru()
     {
@@ -36,14 +39,14 @@ class DashboardController extends Controller
         $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
         $jadwalToday = Mengajar::whereDate('created_at', $today)->get();
         $izinToday = Izin::whereDate('created_at', $today)->get();
-        
+
         // Hitung jumlah jurnal hari ini
         $jurnalTodayCount = $jurnalToday->count();
         $jadwalTodayCount = $jadwalToday->count();
         $izinTodayCount = $izinToday->count();
 
         // Kirim data ke view
-        return view('homeguru', compact('jurnalToday', 'jurnalTodayCount','jadwalToday', 'jadwalTodayCount','izinToday','izinTodayCount'));
+        return view('homeguru', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
     }
     public function jadwal()
     {
@@ -52,14 +55,14 @@ class DashboardController extends Controller
         $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
         $jadwalToday = Mengajar::whereDate('created_at', $today)->get();
         $izinToday = Izin::whereDate('created_at', $today)->get();
-        
+
         // Hitung jumlah jurnal hari ini
         $jurnalTodayCount = $jurnalToday->count();
         $jadwalTodayCount = $jadwalToday->count();
         $izinTodayCount = $izinToday->count();
 
         // Kirim data ke view
-        return view('homejad', compact('jurnalToday', 'jurnalTodayCount','jadwalToday', 'jadwalTodayCount','izinToday','izinTodayCount'));
+        return view('homejad', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
     }
     public function izin()
     {
@@ -68,13 +71,13 @@ class DashboardController extends Controller
         $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
         $jadwalToday = Mengajar::whereDate('created_at', $today)->get();
         $izinToday = Izin::whereDate('created_at', $today)->get();
-        
+
         // Hitung jumlah jurnal hari ini
         $jurnalTodayCount = $jurnalToday->count();
         $jadwalTodayCount = $jadwalToday->count();
         $izinTodayCount = $izinToday->count();
 
         // Kirim data ke view
-        return view('homeizin', compact('jurnalToday', 'jurnalTodayCount','jadwalToday', 'jadwalTodayCount','izinToday','izinTodayCount'));
+        return view('homeizin', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
     }
 }

@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
         <div class="animated fadeIn">
             @if (session('status'))
                 <div class="alert alert-success">
@@ -42,8 +33,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body table-responsive">
-                    <div class="card-body mb-4">
+                <div class="card-body">
+                    {{-- <div class="">
                         <div class="col-md-12 mb-4">
                             <form action="{{ url('filter') }}" method="get" class="filter-form">
                                 @csrf
@@ -63,50 +54,47 @@
                                 <button type="submit" class="btn btn-success rounded mb-4">Simpan</button>
                             </form>
                         </div>
-                        {{-- @if (isset($pesan))
-                            <div class="alert alert-info mt-4">
-                                {{ $pesan }}
-                            </div>
-                        @endif --}}
-                    </div>
+                    </div> --}}
                     @if (isset($bulanName) && isset($selectedKelas))
                         <div class="pull-left mb-4">
                             <h4>Pada bulan: {{ $bulanName }}</h4><br>
                             <h4>Kelas : {{ $selectedKelas }}</h4>
                         </div>
                     @endif
-                    <table id="rkbmTable" class="table table-bordered mt-4">
-                        <thead class="mt-4">
-                            <tr>
-                                <th>No</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Guru</th>
-                                <th>Wajib Hadir</th>
-                                <th>Hadir</th>
-                                <th>Izin</th>
-                                <th>Presentase</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($rkbm as $item)
+                    <div class="card-body table-responsive">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
+                            <thead class="mt-4">
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->mapel->mapel }}</td>
-                                    <td>{{ $item->guru->nama }}</td>
-                                    <td>{{  4 }}</td>
-                                    <td>{{ $item->hadir_count }}</td> <!-- Total jumlah jurnal dengan status 'S' -->
-                                    <td>{{ $item->izin_count }}</td> <!-- Total jumlah izin -->
-                                    <td>
-                                        @if ($item->total > 0)
-                                        {{ number_format(($item->hadir_count + $item->izin_count)/4 * 100) }}%
-                                        @else
-                                            0%
-                                        @endif
-                                    </td>
+                                    <th>No</th>
+                                    <th>Mata Pelajaran</th>
+                                    <th>Guru</th>
+                                    <th>Wajib Hadir</th>
+                                    <th>Hadir</th>
+                                    <th>Izin</th>
+                                    <th>Presentase</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($rkbm as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->mapel->mapel }}</td>
+                                        <td>{{ $item->guru->nama }}</td>
+                                        <td>{{ 4 }}</td>
+                                        <td>{{ $item->hadir_count }}</td>
+                                        <td>{{ $item->izin_count }}</td>
+                                        <td>
+                                            @if ($item->total > 0)
+                                                {{ number_format((($item->hadir_count + $item->izin_count) / 4) * 100) }}%
+                                            @else
+                                                0%
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

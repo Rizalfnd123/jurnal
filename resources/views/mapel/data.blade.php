@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-folder"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))

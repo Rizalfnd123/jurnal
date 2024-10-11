@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-folder"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))
@@ -57,18 +48,21 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->tapel }}</td>
                                     <td>
-                                        <span class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
+                                        <span
+                                            class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
                                             {{ $item->status }}
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{ url('tapel/edit/' . $item->id) }}" class="btn btn-primary btn-sm">
+                                        <a href="{{ url('tapel/edit/' . $item->id) }}"
+                                            class="btn btn-primary rounded btn-sm">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form action="{{ url('tapel/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
+                                        <form action="{{ url('tapel/' . $item->id) }}" method="post" class="d-inline"
+                                            onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger btn-sm">
+                                            <button class="btn btn-danger rounded btn-sm">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -79,7 +73,7 @@
                     </table>
                 </div>
             </div>
-            
+
 
         </div>
 

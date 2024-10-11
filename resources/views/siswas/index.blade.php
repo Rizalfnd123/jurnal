@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
         <div class="animated fadeIn">
             @if (session('status'))
                 <div class="alert alert-success">
@@ -49,7 +40,7 @@
                     <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
                             <tr style="background-color: #a0522d; padding: 10px; border-radius: 5px;">
-                                <th style="width: 50px;">No</th>
+                                {{-- <th style="width: 50px;">No</th> --}}
                                 <th>NIS</th>
                                 <th>Nama</th>
                                 <th>L/P</th>
@@ -61,24 +52,27 @@
                         <tbody class="table-group-divider">
                             @foreach ($siswas as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    {{-- <td>{{ $loop->iteration }}</td> --}}
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->kelamin }}</td>
                                     <td>{{ $item->kelas->kelas }}</td>
                                     <td>
-                                        <span class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
+                                        <span
+                                            class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
                                             {{ $item->status }}
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="btn btn-primary btn-sm">
+                                        <a href="{{ url('siswas/' . $item->id . '/edit') }}"
+                                            class="btn btn-primary btn-sm rounded mb-1">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form action="{{ url('siswas/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
+                                        <form action="{{ url('siswas/' . $item->id) }}" method="post" class="d-inline"
+                                            onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger btn-sm">
+                                            <button class="btn btn-danger btn-sm rounded">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -87,16 +81,16 @@
                             @endforeach
                         </tbody>
                     </table>
-            
+
                     <!-- Pagination links -->
                     <div class="d-flex justify-content-center mt-3">
-                        <div class="pagination-container" >
+                        <div class="pagination-container paginasi">
                             {{ $siswas->links() }}
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 @endsection

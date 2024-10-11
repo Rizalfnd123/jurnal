@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
         <div class="animated fadeIn">
             @if (session('status'))
                 <div class="alert alert-success">
@@ -42,8 +33,8 @@
                         </a>
                     </div> --}}
                 </div>
-                <div class="card-body table-responsive">
-                    <div class="card-body mb-4">
+                <div class="card">
+                    <div class="card-body">
                         <div class="col-md-12 mb-4">
                             <form action="{{ url('filter') }}" method="get" class="filter-form">
                                 @csrf
@@ -62,7 +53,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-success rounded mb-4">Simpan</button>
                             </form>
-                        </div> 
+                        </div>
                         {{-- @if (isset($pesan))
                             <div class="alert alert-info mt-4">
                                 {{ $pesan }}

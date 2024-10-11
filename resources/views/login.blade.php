@@ -21,11 +21,13 @@
         }
 
         input {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow untuk input */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Shadow untuk input */
         }
 
         .card-shadow {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow untuk card */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            /* Shadow untuk card */
         }
 
         footer {
@@ -42,22 +44,23 @@
     <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
 
     <!-- Container Utama -->
-    <div class="min-h-screen flex items-center justify-center relative opacity-90 z-10">
+    <div class="min-h-screen flex items-center justify-center relative opacity-90 z-10 px-4">
 
         <!-- Logo di atas card -->
         <div class="absolute top-0 flex flex-col justify-center items-center w-full mt-5 mb-6">
-            <img src="{{ asset('../style/images/smk.png') }}" alt="Logo Web" class="h-20 w-20 bg-white p-2 rounded-full shadow-lg mb-2">
+            <img src="{{ asset('../style/images/smk.png') }}" alt="Logo Web"
+                class="h-20 w-20 bg-white p-2 rounded-full shadow-lg mb-2">
             <h1 class="text-white text-xl font-bold">SISTEM INFORMASI</h1>
             <h6 class="text-white text-sm font-medium mb-4">Manajemen Pembelajaran Kejuruan</h6>
         </div>
 
         <!-- Card Form Login dengan shadow -->
-        <div class="bg-amber-900 p-8 pt-16 rounded-xl card-shadow w-full max-w-md bg-opacity-50 relative mt-12 ">
+        <div class="bg-amber-900 p-8 pt-16 rounded-xl card-shadow w-full max-w-md bg-opacity-50 relative mt-12">
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="alert alert-danger mb-4">
                     <ul>
                         @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
+                            <li class="text-white">{{ $item }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -69,7 +72,8 @@
                 <!-- Email Input -->
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-white">Email</label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" autofocus placeholder="masukkan email"
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" autofocus
+                        placeholder="masukkan email"
                         class="bg-white mt-1 block w-full px-3 py-2 border border-white rounded-full shadow-md focus:outline-none focus:ring-white focus:border-white sm:text-sm">
                 </div>
 
@@ -93,7 +97,7 @@
 
     <!-- Footer dengan Copyright -->
     <footer class="absolute bottom-0 w-full pb-4">
-        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <p>&copy; 2024 SMK Negeri 2 Sampang</p>
     </footer>
 
 </body>

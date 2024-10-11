@@ -12,7 +12,7 @@ class KelasController extends Controller
 {
     public function data()
     {
-        $kelas = Kelas::paginate(5); // Ambil 10 data per halaman
+        $kelas = Kelas::paginate(10); // Ambil 10 data per halaman
 
         return view('kelas.data', ['kelas' => $kelas]);
     }

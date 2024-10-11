@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-user"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))
@@ -36,10 +27,12 @@
                 <div class="card-header">
                     <strong class="card-title">Data Guru</strong>
                     <div class="pull-right">
-                        <form action="{{ route('guru.import') }}" method="POST" enctype="multipart/form-data" style="display: inline;">
+                        <form action="{{ route('guru.import') }}" method="POST" enctype="multipart/form-data"
+                            style="display: inline;">
                             @csrf
                             <div class="custom-file" style="width: auto; margin-right: 2px">
-                                <input type="file" name="file" class="custom-file-input" id="customFile" placeholder="import dari excel">
+                                <input type="file" name="file" class="custom-file-input" id="customFile"
+                                    placeholder="import dari excel">
                                 <label class="custom-file-label" for="customFile">Pilih file</label>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm mt-1">
@@ -51,7 +44,7 @@
                         </a>
                     </div>
                 </div>
-            
+
                 <div class="card-body table-responsive">
                     {{-- <div class="mb-3">
                         <form method="GET" action="{{ route('guru.data') }}" class="form-inline">
@@ -65,55 +58,68 @@
                             <span class="mr-2">data </span>
                         </form>
                     </div> --}}
-                    
-                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
-                        <thead>
-                            <tr style="background-color: #a0522d; padding: 10px; border-radius: 5px;">
-                                <th style="width: 50px;">No</th>
-                                <th>NIP</th>
-                                <th>Nama</th>
-                                <th>L/P</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Foto</th>
-                                <th style="width: 80px;">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            @foreach ($guru as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nip }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelamin }}</td>
-                                    <td>{{ $item->username }}</td>
-                                    <td>{{ $item->password }}</td>
-                                    <td><img src="{{ asset('images/' . $item->foto) }}" alt="" width="100"></td>
-                                    <td>
-                                        <a href="{{ url('guru/edit/' . $item->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <form action="{{ url('guru/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
+
+                    <div class="table-responsive">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
+                            <thead>
+                                <tr style="background-color: #a0522d; padding: 10px; border-radius: 5px;">
+                                    {{-- <th style="width: 50px;">No</th> --}}
+                                    <th
+                                        style="white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;">
+                                        NIP</th>
+                                    <th>Nama</th>
+                                    {{-- <th>L/P</th> --}}
+                                    {{-- <th>Username</th> --}}
+                                    {{-- <th>Password</th> --}}
+                                    {{-- <th>Foto</th> --}}
+                                    <th style="width: 80px;">Aksi</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-            
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @foreach ($guru as $item)
+                                    <tr>
+                                        {{-- <td>{{ $loop->iteration }}</td> --}}
+                                        <td>{{ $item->nip }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        {{-- <td>{{ $item->kelamin }}</td> --}}
+                                        {{-- <td>{{ $item->username }}</td> --}}
+                                        {{-- <td>{{ $item->password }}</td> --}}
+                                        {{-- <td><img src="{{ asset('images/' . $item->foto) }}" alt="" width="100" class="img-fluid"></td> --}}
+                                        <td>
+                                            <a href="{{ url('guru/edit/' . $item->id) }}"
+                                                class="btn btn-primary btn-sm rounded">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            {{-- <a href="{{ url('guru/edit/' . $item->id) }}"
+                                                class="btn btn-primary btn-sm rounded">
+                                                <i class="fa fa-eye"></i>
+                                            </a> --}}
+                                            <form action="{{ url('guru/' . $item->id) }}" method="post" class="d-inline"
+                                                onsubmit="return confirm('Yakin hapus data?')">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger btn-sm rounded">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="d-flex justify-content-center mt-3">
-                        <div class="pagination-container" >
+                        <div class="pagination-container">
                             {{ $guru->links() }}
                         </div>
                     </div>
+
                 </div>
             </div>
-            
+
         </div>
 
     </div>

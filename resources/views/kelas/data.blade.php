@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-folder"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))
@@ -56,13 +47,15 @@
                                     <td>{{ $loop->iteration + ($kelas->currentPage() - 1) * $kelas->perPage() }}</td>
                                     <td>{{ $item->kelas }}</td>
                                     <td>
-                                        <a href="{{ url('kelas/edit/' . $item->id) }}" class="btn btn-primary rounded">
+                                        <a href="{{ url('kelas/edit/' . $item->id) }}"
+                                            class="btn btn-primary btn-sm rounded">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form action="{{ url('kelas/' . $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
+                                        <form action="{{ url('kelas/' . $item->id) }}" method="post" class="d-inline"
+                                            onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger rounded">
+                                            <button class="btn btn-danger btn-sm rounded">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -71,7 +64,7 @@
                             @endforeach
                         </tbody>
                     </table>
-            
+
                     <!-- Show pagination information and buttons -->
                     <div>
                         <div>
@@ -81,9 +74,9 @@
                     </div>
                 </div>
             </div>
-            
-            
-            
+
+
+
 
         </div>
 

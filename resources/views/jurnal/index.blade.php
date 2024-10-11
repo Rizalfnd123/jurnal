@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))
@@ -33,7 +24,7 @@
                 </div>
             @endif
             <div class="card">
-                <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-primary w-100 rounded-full" style="color: brown">
+                <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-success w-100 rounded-full" style="color: brown">
                     Lihat Jadwal Hari Ini
                 </a>
             </div>
@@ -49,7 +40,7 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -95,10 +86,11 @@
                                     <td>{{ $item->tidak_hadir }}</td>
                                     <td>{{ $item->dokumentasi }}</td>
                                     <td>
-                                        <a href="{{ route('absensi.create', ['jurnal_id' => $item->id]) }}" class="btn btn-success">
-                                            <i class="fa fa-book"></i> 
+                                        <a href="{{ route('absensi.create', ['jurnal_id' => $item->id]) }}"
+                                            class="btn btn-success">
+                                            <i class="fa fa-book"></i>
                                         </a>
-                                        
+
                                         <a href="{{ url('jurnal/' . $item->id . '/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-pencil"></i>
                                         </a>

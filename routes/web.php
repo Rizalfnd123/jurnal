@@ -30,7 +30,7 @@ Route::get('/search-guru', [GuruController::class, 'search']);
 Route::get('guru/data', [GuruController::class, 'data'])->name('guru.data');
 
 Route::post('guru/import', [GuruController::class, 'import'])->name('guru.import');
-
+Route::post('/mengajar/import', [MengajarController::class, 'import'])->name('mengajar.import');
 Route::get('siswas/import', [SiswaController::class, 'import'])->name('siswas.import');
 Route::post('siswas/import', [SiswaController::class, 'importPost'])->name('siswas.import.post');
 
@@ -53,6 +53,11 @@ Route::get('ome', function () {
 
     $jurnal = Mengajar::all();
     return view('home', compact('jurnal'));
+});
+Route::get('/hm', function () {
+
+    $jurnal = Mengajar::all();
+    return view('hm');
 });
 
 Route::get('/rkbm', 'App\Http\Controllers\RkbmController@data');

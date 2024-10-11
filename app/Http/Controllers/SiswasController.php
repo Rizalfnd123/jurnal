@@ -15,7 +15,7 @@ class SiswasController extends Controller
      */
     public function index()
     {
-        $siswas = Siswas::paginate(5);
+        $siswas = Siswas::paginate(15);
         // return $siswas;
         return view('siswas.index', ['siswas' => $siswas]);
     }

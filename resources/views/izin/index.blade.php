@@ -11,20 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
+    <div class="content">
 
         <div class="animated fadeIn">
             @if (session('status'))
@@ -33,23 +24,23 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card">
-                    <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-primary w-100 rounded">
-                        Lihat Jadwal Hari Ini
-                    </a>
-                </div>
+                <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-success w-100 rounded">
+                    Lihat Jadwal Hari Ini
+                </a>
+            </div>
+            <div class="card">
                 <div class="card-header">
                     <div class="pull-left">
                         <strong>Data Izin</strong>
                     </div>
-                    <div class="pull-right">
+                    {{-- <div class="pull-right">
                         <a href="{{ url('izin/create') }}" class="btn btn-success btn-sm">
                             <i class="fa fa-plus"></i>Tambah
                         </a>
-                    </div> 
+                    </div> --}}
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -98,15 +89,16 @@
                                         {{-- <a href="{{ url('izin/' . $item->id) }}" class="btn btn-warning">
                                             <i class="fa fa-eye"></i> Lihat
                                         </a> --}}
-                                        <a href="{{ url('izin/' . $item->id . '/edit') }}" class="btn btn-primary">
-                                            <i class="fa fa-pencil"></i> Edit
+                                        <a href="{{ url('izin/' . $item->id . '/edit') }}"
+                                            class="btn btn-primary btn-sm rounded mb-1">
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form action="{{ url('izin/' . $item->id) }}" method="post" class="d-inline"
                                             onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger -sm">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                            <button class="btn btn-danger btn-sm rounded">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

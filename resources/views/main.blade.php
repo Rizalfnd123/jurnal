@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="{{ asset('style/assets/css/normaize.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -130,14 +129,7 @@
             /* Memusatkan teks di header */
         }
 
-        .table td {
-            white-space: nowrap;
-            /* Mencegah teks membungkus ke baris berikutnya */
-            overflow: hidden;
-            /* Menyembunyikan teks yang melebihi lebar */
-            text-overflow: ellipsis;
-            /* Menambahkan elipsis (...) untuk teks yang terpotong */
-        }
+        .table td {}
 
         .btn {
             border-radius: 10px;
@@ -400,72 +392,65 @@
         }
 
         /* Media Query untuk Mobile */
-        @media (max-width: 768px) {
+        @media (max-width: 768px),
+        (min-width: 768px) and (max-width: 1024px) {
+            .navbar {
+                padding-bottom: 4%;
+                background-color: #6F4E37;
+            }
 
-            /* Sesuaikan sidebar menjadi collapsible */
-            #left-panel {
+            #main-menu {
+                padding-top: 4%;
+            }
+
+            .navbar-header {
+                padding-top: 4%;
+            }
+
+            .left-panel {
                 width: 100%;
                 position: fixed;
-                top: 0;
-                left: 0;
-                height: auto;
                 z-index: 1000;
-                transition: left 0.3s ease;
             }
 
-            #left-panel.collapsed {
-                left: -100%;
-            }
-
-            /* Konten akan mengambil 100% lebar */
-            #right-panel {
+            .right-panel {
                 margin-left: 0;
-                padding: 10px;
+                padding-top: 60px;
+                /* Adjust top space for the mobile header */
             }
 
-            .header-menu {
-                display: flex;
-                justify-content: space-between;
-                padding: 10px;
+            table {
+                font-size: 8px;
+                /* Ukuran font tabel lebih kecil */
             }
 
-            /* Perkecil padding dan margin */
-            .card,
-            .table,
-            .page-header,
-            .breadcrumbs {
-                padding: 10px;
-                margin: 10px 0;
+            td,
+            th {
+                padding: 8px;
+                /* Mengurangi padding di sel */
             }
 
-            .menu-item-has-children .sub-menu {
-                position: relative;
-                left: 0;
-                width: 100%;
+            img {
+                width: 60px;
+                /* Mengurangi ukuran gambar di kolom foto */
             }
 
-            .navbar-brand {
-                font-size: 18px;
+            .btn-sm {
+                padding: 4px 8px;
+                /* Ukuran tombol aksi lebih kecil */
+                font-size: 10px;
             }
 
-            .filter-form {
-                padding: 10px;
+            .pagination-container {
                 font-size: 12px;
             }
 
-            /* Sesuaikan ukuran font dan margin */
-            body,
-            .sidebar,
-            .navbar,
-            .content {
-                font-size: 14px;
-            }
-
-            /* Atur tabel agar bisa di-scroll horizontal */
-            .table-responsive {
-                display: block;
-                width: 100%;
-                overflow-x: auto;
+            td,
+            tr {
+                /* Membungkus teks ke baris baru */
+                max-width: 100px;
+                /* Batasi lebar kolom */
+                max-height: 15px font-size: 5px
             }
         }
     </style>
@@ -477,17 +462,26 @@
     <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('style/assets/js/main.js') }}"></script>
 
-    <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel mb-3">
         <nav class="navbar navbar-expand-sm navbar-default">
-            <div class="navbar-header">
-                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#main-menu"
-                    aria-controls="main-menu" aria-expanded="true" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="">Si-Jurline</a>
-                <a class="navbar-brand hidden" href=""></a>
-            </div>
+            <div class="navbar-header d-flex align-items-center justify-content-between w-100">
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="nav-toggle-btn">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand ml-2 mb-2" href="">Si-Jurline</a>
+                </div>
 
+                <div class="d-flex align-items-center">
+                    <a href="#" class="mr-3">
+                        <img class="user-avatar rounded-circle img-fluid" src="{{ asset('style/images/admin.jpg') }}"
+                            style="width: 40px; height: 40px;">
+                    </a>
+                    <button class="btn btn-sm btn-danger">
+                        <a href="{{ url('') }}" class="text-white">Logout</a>
+                    </button>
+                </div>
+            </div>
             <div id="main-menu"
                 class="main-menu collapse navbar-collapse bg-amber-900 text-white shadow-lg rounded-md p-4">
                 <ul class="nav flex flex-col space-y-3">
@@ -498,38 +492,35 @@
                         </a>
                     </li>
 
-                    <li class="menu-item-has-children dropdown relative group">
+                    <!-- Dropdown Data Umum -->
+                    <li class="menu-item-has-children dropdown relative">
                         <a href="#" onclick="toggleDropdown(this)"
                             class="flex items-center space-x-2 p-2 rounded hover:bg-amber-800 transition-colors duration-300 text-white">
                             <i class="menu-icon fa fa-laptop"></i>
                             <span>Data Umum</span>
                         </a>
                         <ul
-                            class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
+                            class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden transition-all duration-300 shadow-md">
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-folder mr-2"></i><a href="{{ url('mapel') }} " class="text-white">Mata
+                                <i class="fa fa-folder mr-2"></i><a href="{{ url('mapel') }}" class="text-white">Mata
                                     Pelajaran</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-folder"></i><a href="{{ url('kelas') }}"class="text-white">
-                                    Kelas</a>
+                                <i class="fa fa-folder"></i><a href="{{ url('kelas') }}" class="text-white"> Kelas</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-folder"></i><a href="{{ url('jam') }}"class="text-white">
-                                    Jam</a>
+                                <i class="fa fa-folder"></i><a href="{{ url('jam') }}" class="text-white"> Jam</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-folder"></i><a href="{{ url('tapel') }}"class="text-white">
-                                    Tahun
+                                <i class="fa fa-folder"></i><a href="{{ url('tapel') }}" class="text-white"> Tahun
                                     Ajaran</a>
                             </li>
                             <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
-                                <i class="fa fa-folder"></i><a href="{{ url('semester') }}"class="text-white">
+                                <i class="fa fa-folder"></i><a href="{{ url('semester') }}" class="text-white">
                                     Semester</a>
                             </li>
                         </ul>
                     </li>
-
 
                     <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
                         <a href="{{ url('guru') }}" class="flex items-center space-x-2 text-white">
@@ -566,129 +557,56 @@
                         </a>
                     </li>
 
-                    <li class="menu-item-has-children dropdown relative group">
+                    <!-- Dropdown Data Rekap -->
+                    <li class="menu-item-has-children dropdown relative">
                         <a href="#" onclick="toggleDropdown(this)"
                             class="flex items-center space-x-2 p-2 rounded hover:bg-amber-800 transition-colors duration-300 text-white">
                             <i class="menu-icon fa fa-folder-open"></i>
                             <span>Data Rekap</span>
                         </a>
                         <ul
-                            class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden group-hover:block transition-all duration-300 shadow-md">
-                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-file"></i><a href="{{ url('rkbm') }}"class="text-white"> Rekap
-                                    KBM</a></li>
-                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-file"></i><a href="{{ url('rjurnal') }}"class="text-white"> Rekap
+                            class="sub-menu bg-amber-900 text-white p-2 rounded-md space-y-2 absolute hidden transition-all duration-300 shadow-md">
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-file"></i><a href="{{ url('rkbm') }}" class="text-white"> Rekap
+                                    KBM</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-file"></i><a href="{{ url('rjurnal') }}" class="text-white"> Rekap
                                     Jurnal</a>
                             </li>
-                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-file"></i><a href="{{ url('rizin') }}"class="text-white"> Rekap
-                                    Izin</a></li>
-                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300"><i
-                                    class="fa fa-file"></i><a href="{{ url('rabsen') }}"class="text-white"> Rekap
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-file"></i><a href="{{ url('rizin') }}" class="text-white"> Rekap
+                                    Izin</a>
+                            </li>
+                            <li class="hover:bg-amber-800 p-2 rounded transition-colors duration-300">
+                                <i class="fa fa-file"></i><a href="{{ url('rabsen') }}" class="text-white"> Rekap
                                     Absensi</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
-
         </nav>
-    </aside><!-- /#left-panel -->
-
-    <div id="right-panel" class="right-panel ">
-        <header id="header" class="header">
-            <div class="header-menu">
-                <div class="col-sm-7">
-                    {{-- <a id="menuToggle" class="menutoggle pull-left bg-secondary"><i class="fa fa fa-tasks "></i></a> --}}
-                    <div class="header-left">
-                        {{-- <button class="search-trigger"><i class="fa fa-search"></i></button> --}}
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..."
-                                    aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
-                        <div class="dropdown for-notification">
-                            {{-- <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">3</span>
-                            </button> --}}
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media bg-flat-color-1" href="#">
-                                    <i class="fa fa-check"></i>
-                                    <p>Server #1 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media bg-flat-color-4" href="#">
-                                    <i class="fa fa-info"></i>
-                                    <p>Server #2 overloaded.</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-5">
-
-                    <div class="user-area dropdown float-right">
-                        <button class="button me-3 ">
-                            <a href="{{ url('') }}">Logout</a>
-                        </button>
-
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{ asset('style/images/admin.jpg') }}">
-
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
-                        </div>
-                    </div>
+    </aside>
 
 
-                    <div class="language-select dropdown" id="language-select">
-                        {{-- <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language"
-                            aria-haspopup="true" aria-expanded="true">
-                            <i class="flag-icon flag-icon-id"></i>
-                        </a> --}}
-                        <div class="dropdown-menu" aria-labelledby="language">
-
-                            <div class="dropdown-item">
-                                <span class="flag-icon flag-icon-id"></span>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-es"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-us"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-jp"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </header><!-- /header -->
+    <div id="right-panel" class="right-panel">
 
         @yield('breadcrumbs')
 
         @yield('content')
-
-
-
-
     </div>
     @yield('scripts')
 </body>
 <script>
+    function toggleDropdown(element) {
+        // Dapatkan elemen dropdown (sub-menu) dari elemen parent-nya
+        const dropdown = element.nextElementSibling;
+
+        // Toggle kelas 'hidden' untuk menampilkan atau menyembunyikan dropdown
+        dropdown.classList.toggle('hidden');
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         // Hapus overlay saat halaman sepenuhnya dimuat
         var loadingOverlay = document.getElementById("loading-overlay");
@@ -696,6 +614,24 @@
             loadingOverlay.style.display = "none";
         }
     });
+    // Fungsi untuk membuka/menutup sidebar saat tombol toggler diklik
+    function toggleSidebar() {
+        const sidebar = document.getElementById('left-panel');
+        const mainMenu = document.getElementById('main-menu');
+
+        if (sidebar.classList.contains('collapsed')) {
+            sidebar.classList.remove('collapsed'); // Tampilkan sidebar
+        } else {
+            sidebar.classList.add('collapsed'); // Sembunyikan sidebar
+        }
+    }
+
+    // Fungsi untuk menutup sidebar ketika item di sidebar diklik
+    function closeSidebar() {
+        const sidebar = document.getElementById('left-panel');
+        sidebar.classList.add('collapsed'); // Tambahkan class collapsed untuk menyembunyikan sidebar
+    }
+
 
     $(document).ready(function() {
         // Fungsi untuk membuka modal dan mengisi data form
@@ -802,6 +738,13 @@
                 cache: true
             }
         });
+    });
+    const navToggleBtn = document.getElementById('nav-toggle-btn');
+    const mainMenu = document.getElementById('main-menu');
+
+    navToggleBtn.addEventListener('click', function() {
+        // Toggle class 'collapse' untuk expand/close
+        mainMenu.classList.toggle('collapse');
     });
 </script>
 

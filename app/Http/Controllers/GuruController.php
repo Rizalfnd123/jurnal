@@ -14,7 +14,7 @@ class GuruController extends Controller
 {
     public function data(Request $request)
     {
-        $perPage = $request->get('perPage', 5); // Default to 5 if not set
+        $perPage = $request->get('perPage', 10); // Default to 5 if not set
         $guru = DB::table('guru')->paginate($perPage);
         return view('guru.data', ['guru' => $guru]);
     }
