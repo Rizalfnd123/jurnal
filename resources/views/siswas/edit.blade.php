@@ -1,84 +1,71 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Siswa</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Edit Siswa</h1>
+</div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
-
-        <div class="animated fadeIn">
-            <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Edit Data Siswa</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('siswas') }}" class="btn btn-danger btn-sm">
-                            <i class="fa fa-undo"></i>Kembali
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="col-md-4 offset-md-4">
-                        <form action="{{ url('siswas/'.$siswas->id) }}" method="post">
-                            @method('PUT')
-                            @csrf
-                            <div class="form-group">
-                                <label>NIS</label>
-                                <input type="text" name="nis" class="form-control" value="{{ $siswas->nis }}" autofocus required>
-                                <label>Nama</label>
-                                <input type="text" name="nama" class="form-control"value="{{$siswas->nama}}" autofocus required>
-                                <div class="form-group">
-                                    <label>Jenis Kelamin</label><br>
-                                <select name="kelamin" class="form-select" aria-label="Default select example">
-                                    <option value="L">L</option>
-                                    <option value="P">P</option>
-                                </select><br>
-                                </div>
-                                <div class="form-group">
-                                <label>Kelas</label>
-                                <select type="text" name="kelas_id" class="form-control"value="{{$siswas->nis}}"required>
-                                    <option value="">-- pilih --</option>
-                                    @foreach ($kelas as $item )
-                                    <option value="{{ $item->id }}">{{ $item->kelas }}</option>
-                                    @endforeach
-                                </select>
-                               </div>
-                               <div class="form-group">
-                                <label>Status</label>
-                                <select name="status" class="form-select" aria-label="Default select example">
-                                    <option value="aktif">Aktif</option>
-                                    <option value="tidak atif">Tidak aktif</option>
-                                </select>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
-                    </div>
-                </div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
+            <div class="flex justify-between mb-4">
+                <h2 class="text-lg font-semibold">Edit Data Siswa</h2>
+                <a href="{{ url('siswas') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Kembali
+                </a>
             </div>
+            <form action="{{ url('siswas/' . $siswas->id) }}" method="post">
+                @method('PUT')
+                @csrf
+                <div class="grid grid-cols-1 gap-6">
+                    <div>
+                        <label for="nis" class="block text-sm text-gray-700">NIS</label>
+                        <input type="text" name="nis" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm ps-3" value="{{ $siswas->nis }}" autofocus required>
+                    </div>
 
+                    <div>
+                        <label for="nama" class="block text-sm text-gray-700">Nama</label>
+                        <input type="text" name="nama" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm ps-3" value="{{ $siswas->nama }}" required>
+                    </div>
+
+                    <div>
+                        <label for="kelamin" class="block text-sm text-gray-700">Jenis Kelamin</label>
+                        <select name="kelamin" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm ps-3" required>
+                            <option value="L" {{ $siswas->kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="P" {{ $siswas->kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="kelas_id" class="block text-sm text-gray-700">Kelas</label>
+                        <select name="kelas_id" class="form-control ps-3" required>
+                            <option value="">-- pilih --</option>
+                            @foreach ($kelas as $item)
+                                <option value="{{ $item->id }}" {{ $siswas->kelas_id == $item->id ? 'selected' : '' }}>{{ $item->kelas }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm text-gray-700">Status</label>
+                        <select name="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm ps-3" required>
+                            <option value="aktif" {{ $siswas->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="tidak aktif" {{ $siswas->status == 'tidak aktif' ? 'selected' : '' }}>Tidak aktif</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-right">
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition duration-300">
+                        Simpan
+                    </button>
+                </div>
+            </form>
         </div>
-
     </div>
+</div>
 @endsection

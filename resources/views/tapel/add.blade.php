@@ -1,62 +1,54 @@
-@extends('main')
+@extends('hm')
 
-@section('title', 'Dashboard')
+@section('title', 'Tambah Tahun Pelajaran')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Tahun pelajaran</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Tambah Data Tahun Pelajaran</h1>
+</div>
 @endsection
 
 @section('content')
-    <div class="content mt-3">
-
-        <div class="animated fadeIn">
-            <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Tambah Data Tahun pelajaran</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('tapel') }}" class="btn btn-danger btn-sm">
-                            <i class="fa fa-undo"></i>Kembali
+    <div class="content mt-5">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden mb-3">
+                <div class="p-2">
+                    <div class="flex justify-between">
+                        <h2 class="text-lg font-semibold pt-3 ps-3">Tambah Data Tahun Pelajaran</h2>
+                        <a href="{{ url('tapel') }}"
+                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                            Kembali
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="col-md-4 offset-md-4">
-                        <form action="{{ url('tapel') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label>Tahun pelajaran</label>
-                                <input type="text" name="tapel" class="form-control" autofocus required>
+                <div class="p-4">
+                    <form action="{{ url('tapel') }}" method="post" class="shadow-lg p-6 bg-gray-50 rounded-lg">
+                        @csrf
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <label for="tapel" class="block text-gray-700 text-xs">Tahun Pelajaran</label>
+                                <input type="text" name="tapel" id="tapel"
+                                    class="form-input mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-xs p-1"
+                                    required autofocus>
                             </div>
-                            <select name="enum" class="form-select" aria-label="Default select example">
-                                <option value="Aktif">Aktif</option>
-                                <option value="Tidak aktif">Tidak Aktif</option>
-                              </select>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
-                    </div>
+                            <div>
+                                <label for="enum" class="block text-gray-700 text-xs">Status</label>
+                                <select name="enum" id="enum" class="form-select mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-xs p-1" aria-label="Default select example">
+                                    <option value="Aktif">Aktif</option>
+                                    <option value="Tidak aktif">Tidak Aktif</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 text-right">
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition duration-300 text-xs">
+                                Simpan
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
         </div>
-
     </div>
 @endsection

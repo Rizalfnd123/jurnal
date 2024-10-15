@@ -1,96 +1,84 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Siswa</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Siswa</h1>
+</div>
 @endsection
 
 @section('content')
-    <div class="content">
-        <div class="animated fadeIn">
+    <div class="w-full px-2">
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong class="card-title">Data Siswa</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('siswas/create') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i> Tambah
-                        </a>
-                        <a href="{{ route('siswas.import') }}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-upload"></i> Import
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body table-responsive">
-                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
-                        <thead>
-                            <tr style="background-color: #a0522d; padding: 10px; border-radius: 5px;">
-                                {{-- <th style="width: 50px;">No</th> --}}
-                                <th>NIS</th>
-                                <th>Nama</th>
-                                <th>L/P</th>
-                                <th>Kelas</th>
-                                <th>Status</th>
-                                <th style="width: 80px;">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            @foreach ($siswas as $item)
-                                <tr>
-                                    {{-- <td>{{ $loop->iteration }}</td> --}}
-                                    <td>{{ $item->nis }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelamin }}</td>
-                                    <td>{{ $item->kelas->kelas }}</td>
-                                    <td>
-                                        <span
-                                            class="badge {{ $item->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} rounded">
-                                            {{ $item->status }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="{{ url('siswas/' . $item->id . '/edit') }}"
-                                            class="btn btn-primary btn-sm rounded mb-1">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <form action="{{ url('siswas/' . $item->id) }}" method="post" class="d-inline"
-                                            onsubmit="return confirm('Yakin hapus data?')">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger btn-sm rounded">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
 
-                    <!-- Pagination links -->
-                    <div class="d-flex justify-content-center mt-3">
-                        <div class="pagination-container paginasi">
-                            {{ $siswas->links() }}
-                        </div>
-                    </div>
+            <div class="mb-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
+                <strong class="text-lg font-semibold mb-2 sm:mb-0">Data Siswa</strong>
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
+                    <a href="{{ url('siswas/create') }}"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center w-full sm:w-auto">
+                        <i class="fa fa-plus"></i> Tambah
+                    </a>
+                    <a href="{{ route('siswas.import') }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center w-full sm:w-auto">
+                        <i class="fa fa-upload"></i> Import
+                    </a>
                 </div>
             </div>
 
+            <!-- Tabel Data Siswa -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg mx-auto">
+                    <thead>
+                        <tr class="bg-amber-900 text-white uppercase text-xs leading-normal">
+                            <th class="px-2 py-3 text-center">NIS</th>
+                            <th class="px-2 py-3 text-center">Nama</th>
+                            <th class="px-2 py-3 text-center">L/P</th>
+                            <th class="px-2 py-3 text-center">Kelas</th>
+                            <th class="px-2 py-3 text-center">Status</th>
+                            <th class="px-2 py-3 text-center" style="width: 80px;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-xs font-light">
+                        @foreach ($siswas as $item)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="px-2 py-3 text-center">{{ $item->nis }}</td>
+                                <td class="px-2 py-3 text-center">{{ $item->nama }}</td>
+                                <td class="px-2 py-3 text-center">{{ $item->kelamin }}</td>
+                                <td class="px-2 py-3 text-center">{{ $item->kelas->kelas }}</td>
+                                <td class="px-2 py-3 text-center">
+                                    <span class="badge {{ $item->status == 'aktif' ? 'bg-green-500' : 'bg-gray-500' }} rounded-full text-white py-1 px-3">
+                                        {{ $item->status }}
+                                    </span>
+                                </td>
+                                <td class="px-2 py-3 text-center">
+                                    <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="mr-2">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <form action="{{ url('siswas/' . $item->id) }}" method="post" class="inline-block"
+                                        onsubmit="return confirm('Yakin hapus data?')">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="text-red-500">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-3 ">
+                {{ $siswas->links() }}
+            </div>
         </div>
     </div>
 @endsection

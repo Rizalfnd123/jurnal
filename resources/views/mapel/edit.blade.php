@@ -1,63 +1,40 @@
-@extends('main')
+@extends('hm')
 
-@section('title', 'Dashboard')
+@section('title', 'Edit Mapel')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Mapel</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-folder"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Edit Mapel</h1>
+</div>
 @endsection
 
 @section('content')
     <div class="content mt-3">
-
         <div class="animated fadeIn">
-            <div class="card rounded-lg shadow-md">
-                <div class="card-header bg-brown-600 text-black rounded-t-lg py-3 px-4 flex justify-between items-center">
-                    <div class="pull-left">
-                        <strong>Edit Data Mapel</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('mapel') }}" class="btn btn-danger btn-sm rounded shadow">
-                            <i class="fa fa-undo"></i> Kembali
-                        </a>
-                    </div>
+            <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
+                <div class="flex justify-between mb-4">
+                    <h2 class="text-lg font-semibold">Edit Data Mapel</h2>
+                    <a href="{{ url('mapel') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Kembali
+                    </a>
                 </div>
-            
-                <div class="card-body bg-white p-6 rounded-b-lg">
-                    <div class="col-md-4 offset-md-4">
-                        <form action="{{ url('mapel/'.$mapel->id) }}" method="post" class="space-y-4">
-                            @method('patch')
-                            @csrf
-                            <div class="form-group">
-                                <label for="mapel" class="font-semibold">Mata Pelajaran</label>
-                                <input type="text" id="mapel" name="mapel" class="form-control shadow-md p-2 rounded-md border focus:ring focus:ring-brown-300 focus:border-brown-600" value="{{ $mapel->mapel }}" autofocus required>
-                            </div>
-                            <button type="submit" class="btn btn-success shadow-md w-full py-2 rounded bg-brown-600 hover:bg-brown-700 text-white">
-                                Simpan
-                            </button>
-                        </form>
+                <form action="{{ url('mapel/' . $mapel->id) }}" method="post" class="space-y-4">
+                    @method('patch')
+                    @csrf
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="mapel" class="block text-sm text-gray-700">Mata Pelajaran</label>
+                            <input type="text" name="mapel" id="mapel" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ $mapel->mapel }}" autofocus required>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="mt-6 text-right">
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition duration-300">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
-            
-
         </div>
-
     </div>
 @endsection

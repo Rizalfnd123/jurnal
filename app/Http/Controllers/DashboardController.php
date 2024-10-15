@@ -15,23 +15,26 @@ class DashboardController extends Controller
         return view('login');
     }
     public function index()
-    {
-        // Ambil data jurnal hari ini
-        $today = Carbon::today();
-        $jadtoday = Carbon::now()->isoFormat('dddd');
-        $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
-        // Ambil data jadwal berdasarkan hari ini
-        $jadwalToday = Mengajar::where('hari', $jadtoday)->get();
-        $izinToday = Izin::whereDate('created_at', $today)->get();
+{
+    // Ambil hari ini dengan Carbon dalam format lokal
+    $today = Carbon::today();
+    
+    // Ambil hari dalam format bahasa Indonesia
+    $jadtoday = Carbon::now()->locale('id')->isoFormat('dddd'); // "Senin", "Selasa", dll.
+    
+    // Ambil data jurnal dan jadwal berdasarkan hari ini
+    $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
+    $jadwalToday = Mengajar::where('hari', $jadtoday)->get();
+    $izinToday = Izin::whereDate('created_at', $today)->get();
 
-        // Hitung jumlah jurnal hari ini
-        $jurnalTodayCount = $jurnalToday->count();
-        $jadwalTodayCount = $jadwalToday->count();
-        $izinTodayCount = $izinToday->count();
+    // Hitung jumlah jurnal, jadwal, dan izin hari ini
+    $jurnalTodayCount = $jurnalToday->count();
+    $jadwalTodayCount = $jadwalToday->count();
+    $izinTodayCount = $izinToday->count();
 
-        // Kirim data ke view
-        return view('home', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
-    }
+    // Kirim data ke view
+    return view('home', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
+}
     public function indexguru()
     {
         // Ambil data jurnal hari ini
@@ -50,17 +53,22 @@ class DashboardController extends Controller
     }
     public function jadwal()
     {
-        // Ambil data jurnal hari ini
+        // Ambil hari ini dengan Carbon dalam format lokal
         $today = Carbon::today();
+        
+        // Ambil hari dalam format bahasa Indonesia
+        $jadtoday = Carbon::now()->locale('id')->isoFormat('dddd'); // "Senin", "Selasa", dll.
+        
+        // Ambil data jurnal dan jadwal berdasarkan hari ini
         $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
-        $jadwalToday = Mengajar::whereDate('created_at', $today)->get();
+        $jadwalToday = Mengajar::where('hari', $jadtoday)->get();
         $izinToday = Izin::whereDate('created_at', $today)->get();
-
-        // Hitung jumlah jurnal hari ini
+    
+        // Hitung jumlah jurnal, jadwal, dan izin hari ini
         $jurnalTodayCount = $jurnalToday->count();
         $jadwalTodayCount = $jadwalToday->count();
         $izinTodayCount = $izinToday->count();
-
+    
         // Kirim data ke view
         return view('homejad', compact('jurnalToday', 'jurnalTodayCount', 'jadwalToday', 'jadwalTodayCount', 'izinToday', 'izinTodayCount'));
     }

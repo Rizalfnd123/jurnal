@@ -3,15 +3,21 @@
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="bg-amber-900 mb-4">
-        <h3 class="text-3xl font-bold text-white">Dashboard {{ Auth::user()->name }}</h3>
+    <div class="">
+        <h3 class="text-3xl font-bold text-white mb-3">Dashboard {{ Auth::user()->name }}</h3>
     </div>
 @endsection
 
 @section('content')
-    <div class="w-full px-6">
+    <div class="w-full px-2"> <!-- Tambahkan informasi lokasi di sini -->
+        <div id="location" class="bg-white rounded-lg shadow-lg p-6 mt-4 mb-4">
+            <h4 class="font-semibold">Lokasi Anda:</h4>
+            <p>Desa: <span id="desa">Loading...</span></p>
+            <p>Kecamatan: <span id="kecamatan">Loading...</span></p>
+            <p>Kota: <span id="kota">Loading...</span></p>
+        </div>      
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/home') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
@@ -19,13 +25,13 @@
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-700 font-semibold">Jurnal hari ini</div>
-                            <div class="text-5xl font-bold">{{ $jurnalTodayCount }}</div>
+                            <div class="text-3xl font-bold">{{ $jurnalTodayCount }}</div>
                         </div>
                     </div>
                 </a>
             </div>
-
-            <div class="bg-white rounded-lg shadow-lg p-6">
+        
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/homeizin') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
@@ -38,8 +44,8 @@
                     </div>
                 </a>
             </div>
-
-            <div class="bg-white rounded-lg shadow-lg p-6">
+        
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/homejad') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
@@ -52,24 +58,16 @@
                     </div>
                 </a>
             </div>
-
-            <div class="bg-white rounded-lg shadow-lg p-6">
+        
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/home') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-folder"></i> <!-- Ikon Rekap -->
+                            <i class="fas fa-folder"></i> <!-- Ikon Jadwal -->
                         </div>
-                        <div class="ml-4 flex flex-col">
-                            <div class="flex items-center">
-                                <div class="text-gray-700 font-semibold">Rekap hari ini</div>
-                                <div class="text-amber-500 text-3xl ml-2">
-                                </div>
-                            </div>
-                            <div class="text-2xl font-bold flex items-center">
-                                <div class="text-amber-500 text-3xl">
-                                </div>
-                                <span class="ml-2">{{ $jurnalTodayCount }}</span>
-                            </div>
+                        <div class="ml-4">
+                            <div class="text-gray-700 font-semibold">Rekap hari ini</div>
+                            <div class="text-3xl font-bold">{{ $jurnalTodayCount }}</div>
                         </div>
                     </div>
                 </a>

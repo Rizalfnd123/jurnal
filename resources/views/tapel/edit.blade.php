@@ -1,65 +1,52 @@
-@extends('main')
+@extends('hm')
 
-@section('title', 'Dashboard')
+@section('title', 'Edit Tahun Pelajaran')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Tahun pelajaran</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Edit Tahun Pelajaran</h1>
+</div>
 @endsection
 
 @section('content')
     <div class="content mt-3">
-
         <div class="animated fadeIn">
-            <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Edit Data Tahun pelajaran</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('tapel') }}" class="btn btn-danger btn-sm">
-                            <i class="fa fa-undo"></i>Kembali
-                        </a>
-                    </div>
+            <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
+                <div class="flex justify-between mb-4">
+                    <h2 class="text-lg font-semibold">Edit Data Tahun Pelajaran</h2>
+                    <a href="{{ url('tapel') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Kembali
+                    </a>
                 </div>
-                <div class="card-body">
-                    <div class="col-md-4 offset-md-4">
-                        <form action="{{ url('tapel/' . $tapel->id) }}" method="post">
-                            @method('patch')
-                            @csrf
-                            <div class="form-group">
-                                <label>Tahun pelajaran</label>
-                                <input type="text" name="tapel" class="form-control"
-                                    value="{{ $tapel->tapel }}"autofocus required>
-                            </div>
-                            <select name="enum" class="form-select" aria-label="Default select example">
-                                {{-- <option selected>Open this select menu</option> --}}
-                                <option value="Aktif">Aktif</option>
-                                <option value="Tidak aktif">Tidak Aktif</option>
+                <form action="{{ url('tapel/' . $tapel->id) }}" method="post" class="space-y-4">
+                    @method('patch')
+                    @csrf
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="tapel" class="block text-sm text-gray-700">Tahun Pelajaran</label>
+                            <input type="text" name="tapel" id="tapel" 
+                                   class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" 
+                                   value="{{ $tapel->tapel }}" autofocus required>
+                        </div>
+                        <div>
+                            <label for="enum" class="block text-sm text-gray-700">Status</label>
+                            <select name="enum" id="enum" 
+                                    class="form-select mt-1 block w-full border-gray-300 rounded-md shadow-sm" 
+                                    aria-label="Default select example">
+                                <option value="Aktif" {{ $tapel->enum == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="Tidak aktif" {{ $tapel->enum == 'Tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                             </select>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="mt-6 text-right">
+                        <button type="submit" 
+                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition duration-300">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
-
         </div>
-
     </div>
 @endsection

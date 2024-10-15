@@ -10,9 +10,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/themify-icons@0.3.1/css/themify-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
+        #map {
+            height: 400px;
+            /* Atur tinggi peta */
+            width: 100%;
+            /* Atur lebar peta */
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
+            background-image: url('{{ asset('../style/images/bg.png') }}');
+            background-size: cover;
+            background-position: center;
+        }
+
+        td .btn {
+            display: inline-block;
+            margin-right: 5px;
         }
 
         .sidebar {
@@ -31,7 +48,7 @@
 
 <body class="bg-amber-900">
     <!-- Navbar -->
-    <nav class="bg-amber-800 p-4 shadow-md z-20 relative">
+    <nav class="bg-amber-800 p-4 shadow-md z-20 relative bg bg-opacity-80 backdrop-blur-sm">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <button id="navbar-toggle" class="text-white focus:outline-none">
@@ -55,7 +72,7 @@
 
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="bg-amber-800 text-white w-64 h-[calc(100%-64px)] fixed left-0 top-16 transform -translate-x-full transition-transform duration-300 z-10">
+        class="bg-amber-800 text-white w-64 h-[calc(100%-64px)] fixed left-0 top-16 transform -translate-x-full transition-transform duration-300 z-10 bg bg-opacity-80 backdrop-blur-sm">
         <div class="p-4">
             <ul class="mt-4">
                 <li><a href="{{ url('home') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
@@ -124,6 +141,92 @@
     @yield('scripts')
 </body>
 <script>
+    function showPosition(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    console.log("Latitude: " + lat + ", Longitude: " + lon); // Tambahkan ini untuk debug
+
+    // Menggunakan Nominatim untuk mendapatkan alamat
+    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Tambahkan ini untuk debug
+
+            const address = data.address;
+            let desa = address.village || address.suburb || 'Tidak ditemukan';
+            let kecamatan = address.neighbourhood || 'Tidak ditemukan';
+            let kota = address.city || address.town || address.county || 'Tidak ditemukan';
+
+            // Menampilkan lokasi
+            document.getElementById("location").innerHTML = `
+                <p>Desa: ${desa}</p>
+                <p>Kecamatan: ${kecamatan}</p>
+                <p>Kota: ${kota}</p>
+            `;
+
+            // Inisialisasi Peta
+            const map = L.map('map').setView([lat, lon], 13);
+            L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under ODbL.'
+}).addTo(map);
+
+            L.marker([lat, lon]).addTo(map).bindPopup('Anda berada di sini').openPopup();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        // Menggunakan Nominatim untuk mendapatkan alamat
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+                const address = data.address;
+                let desa = address.village || address.suburb || 'Tidak ditemukan';
+                let kecamatan = address.neighbourhood || 'Tidak ditemukan';
+                let kota = address.city || address.town || address.county || 'Tidak ditemukan';
+
+                // Menampilkan lokasi
+                document.getElementById("location").innerHTML = `
+                <p>Desa: ${desa}</p>
+                <p>Kecamatan: ${kecamatan}</p>
+                <p>Kota: ${kota}</p>
+            `;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+
+    getLocation();
+
     document.getElementById('navbar-toggle').onclick = function() {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.toggle('-translate-x-full');

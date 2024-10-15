@@ -1,126 +1,74 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Guru</h1>
-                </div>
-            </div>
-        </div>
+    <div class="w-full px-2">
+        <h1 class="text-3xl font-bold text-white mb-3">Guru</h1>
     </div>
 @endsection
 
 @section('content')
-    <div class="content">
-
-        <div class="animated fadeIn">
+    <div class="w-full px-2">
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="card">
-                <div class="card-header">
-                    <strong class="card-title">Data Guru</strong>
-                    <div class="pull-right">
-                        <form action="{{ route('guru.import') }}" method="POST" enctype="multipart/form-data"
-                            style="display: inline;">
-                            @csrf
-                            <div class="custom-file" style="width: auto; margin-right: 2px">
-                                <input type="file" name="file" class="custom-file-input" id="customFile"
-                                    placeholder="import dari excel">
-                                <label class="custom-file-label" for="customFile">Pilih file</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm mt-1">
-                                <i class="fa fa-upload"></i> Import
-                            </button>
-                        </form>
-                        <a href="{{ url('guru/add') }}" class="btn btn-success btn-sm mt-1">
-                            <i class="fa fa-plus"></i> Tambah
-                        </a>
-                    </div>
+
+            <div class="mb-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
+                <strong class="text-lg font-semibold mb-2 sm:mb-0">Data Guru</strong>
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
+                    <!-- Form Import -->
+                    
+            
+                    <!-- Tombol Tambah -->
+                    <a href="{{ url('guru/add') }}"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center w-full sm:w-auto">
+                        <i class="fa fa-plus"></i> Tambah
+                    </a>
                 </div>
+            </div>            
 
-                <div class="card-body table-responsive">
-                    {{-- <div class="mb-3">
-                        <form method="GET" action="{{ route('guru.data') }}" class="form-inline">
-                            <label for="per_page" class="mr-2">Tampilkan:</label>
-                            <select name="per_page" id="per_page" class="form-control mr-2" onchange="this.form.submit()">
-                                <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
-                                <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                                <option value="15" {{ request('per_page') == 15 ? 'selected' : '' }}>15</option>
-                                <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
-                            </select>
-                            <span class="mr-2">data </span>
-                        </form>
-                    </div> --}}
-
-                    <div class="table-responsive">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
-                            <thead>
-                                <tr style="background-color: #a0522d; padding: 10px; border-radius: 5px;">
-                                    {{-- <th style="width: 50px;">No</th> --}}
-                                    <th
-                                        style="white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;">
-                                        NIP</th>
-                                    <th>Nama</th>
-                                    {{-- <th>L/P</th> --}}
-                                    {{-- <th>Username</th> --}}
-                                    {{-- <th>Password</th> --}}
-                                    {{-- <th>Foto</th> --}}
-                                    <th style="width: 80px;">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                @foreach ($guru as $item)
-                                    <tr>
-                                        {{-- <td>{{ $loop->iteration }}</td> --}}
-                                        <td>{{ $item->nip }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        {{-- <td>{{ $item->kelamin }}</td> --}}
-                                        {{-- <td>{{ $item->username }}</td> --}}
-                                        {{-- <td>{{ $item->password }}</td> --}}
-                                        {{-- <td><img src="{{ asset('images/' . $item->foto) }}" alt="" width="100" class="img-fluid"></td> --}}
-                                        <td>
-                                            <a href="{{ url('guru/edit/' . $item->id) }}"
-                                                class="btn btn-primary btn-sm rounded">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                            {{-- <a href="{{ url('guru/edit/' . $item->id) }}"
-                                                class="btn btn-primary btn-sm rounded">
-                                                <i class="fa fa-eye"></i>
-                                            </a> --}}
-                                            <form action="{{ url('guru/' . $item->id) }}" method="post" class="d-inline"
-                                                onsubmit="return confirm('Yakin hapus data?')">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger btn-sm rounded">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-3">
-                        <div class="pagination-container">
-                            {{ $guru->links() }}
-                        </div>
-                    </div>
-
-                </div>
+            <!-- Tabel Data Guru -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg mx-auto">
+                    <thead>
+                        <tr class="bg-amber-900 text-white uppercase text-xs leading-normal">
+                            <th class="px-2 py-3 text-center">NIP</th>
+                            <th class="px-2 py-3 text-center">Nama</th>
+                            <th class="px-2 py-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-xs font-light">
+                        @foreach ($guru as $item)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="px-2 py-3 text-center">{{ $item->nip }}</td>
+                                <td class="px-2 py-3 text-center">{{ $item->nama }}</td>
+                                <td class="px-2 py-3 text-center">
+                                    <a href="{{ url('guru/edit/' . $item->id) }}" class="mr-2">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <form action="{{ url('guru/' . $item->id) }}" method="post" class="inline-block"
+                                        onsubmit="return confirm('Yakin hapus data?')">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="text-red-500">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
 
+            <!-- Pagination -->
+            <div class="mt-3 ">
+                {{ $guru->links() }}
+            </div>
         </div>
-
     </div>
 @endsection

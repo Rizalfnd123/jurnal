@@ -1,60 +1,52 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Jam</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Jam</h1>
+</div>
 @endsection
 
 @section('content')
     <div class="content">
-
         <div class="animated fadeIn">
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="card">
-                <div class="card-header">
-                    <strong class="card-title">Data Jam</strong>
-                    <div class="pull-right">
-                        <a href="{{ url('jam/add') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i> Tambah
-                        </a>
-                    </div>
+
+            <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <strong class="text-lg font-semibold">Data Jam</strong>
+                    <a href="{{ url('jam/add') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fa fa-plus"></i> Tambah
+                    </a>
                 </div>
-                <div class="card-body table-responsive">
-                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg">
                         <thead>
-                            <tr>
-                                <th style="width: 50px;">No</th> <!-- Lebar kolom No -->
-                                <th style="width: 200px;">Jam</th> <!-- Lebar kolom Jam -->
-                                <th style="width: 80px;">Aksi</th> <!-- Lebar kolom Aksi -->
+                            <tr class="bg-amber-900 text-white uppercase text-xs leading-normal">
+                                <th class="py-3 px-6 text-left" style="width: 50px;">No</th>
+                                <th class="py-3 px-6 text-left" style="width: 200px;">Jam</th>
+                                <th class="py-3 px-6 text-left" style="width: 80px;">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-gray-600 text-sm font-light">
                             @foreach ($jam as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->jam }}</td>
-                                    <td>
-                                        <a href="{{ url('jam/edit/' . $item->id) }}" class="btn btn-primary rounded btn-sm">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">{{ $loop->iteration }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $item->jam }}</td>
+                                    <td class="py-3 px-6 text-left">
+                                        <a href="{{ url('jam/edit/' . $item->id) }}" class="mr-3 text-blue-500 hover:text-blue-700">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form action="{{ url('jam/' . $item->id) }}" method="post" class="d-inline"
-                                            onsubmit="return confirm('Yakin hapus data?')">
+                                        <form action="{{ url('jam/' . $item->id) }}" method="post" class="inline-block" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger rounded btn-sm">
+                                            <button class="text-red-500 hover:text-red-700">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -65,10 +57,6 @@
                     </table>
                 </div>
             </div>
-
-
-
         </div>
-
     </div>
 @endsection

@@ -1,104 +1,98 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Izin</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Data Izin</h1>
+</div>
 @endsection
 
 @section('content')
     <div class="content">
-
         <div class="animated fadeIn">
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="card">
-                <a href="{{ url('/jadwal-hari-ini') }}" class="btn btn-success w-100 rounded">
+
+            <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
+                <a href="{{ url('/jadwal-hari-ini') }}" class="block bg-amber-900 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-full text-center">
                     Lihat Jadwal Hari Ini
                 </a>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Data Izin</strong>
-                    </div>
-                    {{-- <div class="pull-right">
-                        <a href="{{ url('izin/create') }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i>Tambah
-                        </a>
-                    </div> --}}
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <strong class="text-lg font-semibold">Data Izin</strong>
                 </div>
-                <div class="card-body table-responsive">
-                    <table id="bootstrap-data-table" class="table table-striped table-bordered rounded">
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg">
                         <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Nama Guru</th>
-                                <th>Keterangan</th>
-                                <th>Surat</th>
-                                <th>Kelas</th>
-                                <th>Mapel</th>
-                                <th>Kegiatan</th>
-                                <th>Lampiran</th>
-                                <th>Aksi</th>
+                            <tr class="bg-amber-900 text-white uppercase text-xs leading-normal">
+                                <th class="py-3 px-6 text-left">No</th>
+                                <th class="py-3 px-6 text-left">Tanggal</th>
+                                <th class="py-3 px-6 text-left">Nama Guru</th>
+                                <th class="py-3 px-6 text-left">Keterangan</th>
+                                <th class="py-3 px-6 text-left">Surat</th>
+                                <th class="py-3 px-6 text-left">Kelas</th>
+                                <th class="py-3 px-6 text-left">Mapel</th>
+                                <th class="py-3 px-6 text-left">Kegiatan</th>
+                                <th class="py-3 px-6 text-left">Lampiran</th>
+                                <th class="py-3 px-6 text-left">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="table-group-divider">
+                        <tbody class="text-gray-600 text-sm font-light">
                             @foreach ($izin as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                                    <td>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6">{{ $loop->iteration }}</td>
+                                    <td class="py-3 px-6">{{ $item->created_at->format('Y-m-d') }}</td>
+                                    <td class="py-3 px-6">
                                         @if ($item->guru)
                                             {{ $item->guru->nama }}
                                         @else
-                                            <span class="text-danger">Guru tidak ditemukan</span>
+                                            <span class="text-red-500">Guru tidak ditemukan</span>
                                         @endif
                                     </td>
-                                    <td>{{ $item->ket }}</td>
-                                    <td>{{ $item->surat }}</td>
-                                    <td>
+                                    <td class="py-3 px-6">
+                                        @if ($item->status === 'B')
+                                            <span class="bg-red-100 text-red-500 py-1 px-2 rounded-full text-xs">Belum Mengisi</span>
+                                        @elseif($item->status === 'S')
+                                            <span class="bg-green-100 text-green-500 py-1 px-2 rounded-full text-xs">Sudah Mengisi Jurnal</span>
+                                        @elseif($item->status === 'I')
+                                            <span class="bg-blue-100 text-blue-500 py-1 px-2 rounded-full text-xs">Sudah Mengisi Izin</span>
+                                        @else
+                                            <span class="bg-gray-100 text-gray-500 py-1 px-2 rounded-full text-xs">{{ $item->ket }}</span>
+                                        @endif
+                                    </td>
+                                    <td class="py-3 px-6">{{ $item->surat }}</td>
+                                    <td class="py-3 px-6">
                                         @if ($item->kelas)
                                             {{ $item->kelas->kelas }}
                                         @else
-                                            <span class="text-danger">Kelas tidak ditemukan</span>
+                                            <span class="text-red-500">Kelas tidak ditemukan</span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="py-3 px-6">
                                         @if ($item->mapel)
                                             {{ $item->mapel->mapel }}
                                         @else
-                                            <span class="text-danger">Mata Pelajaran tidak ditemukan</span>
+                                            <span class="text-red-500">Mata Pelajaran tidak ditemukan</span>
                                         @endif
                                     </td>
-                                    <td>{{ $item->kegiatan }}</td>
-                                    <td>{{ $item->lampiran }}</td>
-                                    <td>
-                                        {{-- <a href="{{ url('izin/' . $item->id) }}" class="btn btn-warning">
-                                            <i class="fa fa-eye"></i> Lihat
-                                        </a> --}}
-                                        <a href="{{ url('izin/' . $item->id . '/edit') }}"
-                                            class="btn btn-primary btn-sm rounded mb-1">
-                                            <i class="fa fa-pencil"></i>
+                                    <td class="py-3 px-6">{{ $item->kegiatan }}</td>
+                                    <td class="py-3 px-6">{{ $item->lampiran }}</td>
+                                    <td class="py-3 px-6 space-x-2">
+                                        <a href="{{ url('izin/' . $item->id . '/edit') }}" class="text-blue-500 hover:text-blue-700">
+                                            <i class="fa fa-pencil"> Edit</i>
                                         </a>
-                                        <form action="{{ url('izin/' . $item->id) }}" method="post" class="d-inline"
-                                            onsubmit="return confirm('Yakin hapus data?')">
+                                        <form action="{{ url('izin/' . $item->id) }}" method="post" class="inline-block" onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger btn-sm rounded">
-                                                <i class="fa fa-trash"></i>
+                                            <button class="text-red-500 hover:text-red-700">
+                                                <i class="fa fa-trash"> Hapus</i>
                                             </button>
                                         </form>
                                     </td>
@@ -106,10 +100,13 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <!-- Pagination -->
+                    {{-- <div class="mt-3">
+                        {{ $izin->links() }}
+                    </div> --}}
                 </div>
             </div>
-
         </div>
-
     </div>
 @endsection

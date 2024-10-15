@@ -1,99 +1,87 @@
-@extends('main')
+@extends('hm')
 
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Edit izin</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="w-full px-2">
+    <h1 class="text-3xl font-bold text-white mb-3">Edit Izin</h1>
+</div>
 @endsection
 
 @section('content')
     <div class="content mt-3">
-
         <div class="animated fadeIn">
-            <div class="card">
-                <div class="card-header">
-                    <div class="pull-left">
-                        <strong>Edit Data</strong>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{ url('izin') }}" class="btn btn-danger btn-sm">
-                            <i class="fa fa-undo"></i>Kembali
-                        </a>
-                    </div>
+            <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
+                <div class="flex justify-between mb-4">
+                    <h2 class="text-lg font-semibold">Edit Data Izin</h2>
+                    <a href="{{ url('izin') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Kembali
+                    </a>
                 </div>
-                <div class="card-body">
-                    <div class="col-md-4 offset-md-4">
-                        <form action="{{ url('izin/'.$izin->id) }}" method="post">
-                            @method('PUT')
-                            @csrf
-                            <div class="form-group">
-                                <label>Tanggal</label>
-                                <input type="date" name="tanggal" class="form-control"value="{{ $izin->tanggal }} "autofocus required>
-                            </div>
-                            <div class="form-group">
-                                <label>Guru</label>
-                                <select type="text" name="guru_id" class="form-control"value="{{ $izin->guru }} "required>
-                                    @foreach ($guru as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Kelas</label>
-                                <select type="text" name="kelas_id" class="form-control"value="{{ $izin->kelas }} "required>
-                                    @foreach ($kelas as $item)
-                                        <option value="{{ $item->id }}">{{ $item->kelas }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Mata Pelajaran</label>
-                                <select type="text" name="mapel_id" class="form-control"value="{{ $izin->mapel }} "required>
-                                    @foreach ($mapel as $item)
-                                        <option value="{{ $item->id }}">{{ $item->mapel }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <input type="text" name="ket" class="form-control" value="{{ $izin->ket }} "autofocus required>
-                            </div>
-                            <div class="form-group">
-                                <label>Kegiatan</label>
-                                <input type="text" name="kegiatan" class="form-control" value="{{ $izin->kegiatan }} "autofocus required>
-                            </div>
-                            <div class="form-group">
-                                <label>Surat</label>
-                                <input type="file" name="surat" class="form-control"value="{{ $izin->surat }} "autofocus required>
-                            </div>
-                            <div class="form-group">
-                                <label>Lampiran</label>
-                                <input type="file" name="lampiran" class="form-control"value="{{ $izin->lampiran}} "autofocus required>
-                            </div>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
+                <form action="{{ url('izin/' . $izin->id) }}" method="post" enctype="multipart/form-data">
+                    @method('PUT')
+                    @csrf
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="tanggal" class="block text-sm text-gray-700">Tanggal</label>
+                            <input type="date" name="tanggal" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ $izin->tanggal }}" autofocus required>
+                        </div>
+
+                        <div>
+                            <label for="guru_id" class="block text-sm text-gray-700">Guru</label>
+                            <select name="guru_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                                @foreach ($guru as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $izin->guru_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="kelas_id" class="block text-sm text-gray-700">Kelas</label>
+                            <select name="kelas_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                                @foreach ($kelas as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $izin->kelas_id ? 'selected' : '' }}>{{ $item->kelas }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="mapel_id" class="block text-sm text-gray-700">Mata Pelajaran</label>
+                            <select name="mapel_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                                @foreach ($mapel as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $izin->mapel_id ? 'selected' : '' }}>{{ $item->mapel }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="ket" class="block text-sm text-gray-700">Keterangan</label>
+                            <input type="text" name="ket" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ $izin->ket }}" required>
+                        </div>
+
+                        <div>
+                            <label for="kegiatan" class="block text-sm text-gray-700">Kegiatan</label>
+                            <input type="text" name="kegiatan" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ $izin->kegiatan }}" required>
+                        </div>
+
+                        <div>
+                            <label for="surat" class="block text-sm text-gray-700">Surat</label>
+                            <input type="file" name="surat" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm" value="{{ $izin->surat }}" required>
+                        </div>
+
+                        <div>
+                            <label for="lampiran" class="block text-sm text-gray-700">Lampiran</label>
+                            <input type="file" name="lampiran" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm" value="{{ $izin->lampiran }}" required>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="mt-6 text-right">
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition duration-300">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
-
         </div>
-
     </div>
 @endsection
