@@ -20,35 +20,45 @@ class MengajarController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $search = $request->input('search'); // Ambil input pencarian
+{
+    $search = $request->input('search'); // Ambil input pencarian
+    $hari = $request->input('hari'); // Ambil input filter hari
+    $sort_by = $request->input('sort_by', 'hari'); // Default sorting by 'hari'
+    $order = $request->input('order', 'asc'); // Default order is ascending
 
     $mengajars = Mengajar::with(['jam', 'jamselesai', 'kelas', 'mapel', 'guru'])
+        ->leftJoin('kelas', 'mengajars.kelas_id', '=', 'kelas.id') // Join tabel kelas
+        ->leftJoin('jam', 'mengajars.jam_id', '=', 'jam.id') // Join tabel jam
         ->when($search, function ($query, $search) {
             return $query->where('hari', 'like', "%{$search}%")
-                         ->orWhereHas('mapel', function ($query) use ($search) {
-                             $query->where('mapel', 'like', "%{$search}%");
-                         })
-                         ->orWhereHas('guru', function ($query) use ($search) {
-                             $query->where('nama', 'like', "%{$search}%");
-                         });
+                ->orWhereHas('mapel', function ($query) use ($search) {
+                    $query->where('mapel', 'like', "%{$search}%");
+                })
+                ->orWhereHas('guru', function ($query) use ($search) {
+                    $query->where('nama', 'like', "%{$search}%");
+                });
         })
-        ->paginate(10); // Mengambil 10 item per halaman
+        ->when($hari, function ($query, $hari) {
+            return $query->where('hari', $hari); // Filter hari lebih awal
+        })
+        ->orderBy(
+            $sort_by == 'kelas' ? 'kelas.kelas' : ($sort_by == 'jam' ? 'jam.jam' : 'hari'), 
+            $order
+        )
+        ->select('mengajars.*') // Select data utama dari tabel mengajars
+        ->paginate(20);
 
-        // Ambil data tambahan
-        $kelas = Kelas::all();
-        $jam = Jam::all();
-        $mapel = Mapel::all();
-        $semester = Semester::all();
-        $guru = Guru::all();
-        $tapel = Tapel::all();
+    // Ambil data tambahan
+    $kelas = Kelas::all();
+    $jam = Jam::all();
+    $mapel = Mapel::all();
+    $semester = Semester::all();
+    $guru = Guru::all();
+    $tapel = Tapel::all();
 
-        // Kirim data ke view
-        return view('mengajar.index', compact('mengajars', 'kelas', 'jam', 'mapel', 'guru', 'semester', 'tapel'));
-    }
-
-
-
+    // Kirim data ke view
+    return view('mengajar.index', compact('mengajars', 'kelas', 'jam', 'mapel', 'guru', 'semester', 'tapel'));
+}
 
     /**
      * Show the form for creating a new resource.

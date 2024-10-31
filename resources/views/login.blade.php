@@ -67,8 +67,18 @@
             @endif
 
             <!-- Form Login -->
-            <form method="POST" action="">
+            <form method="POST" action="{{ url('/') }}">
                 @csrf
+                @if ($errors->any())
+                    <div class="mb-4 text-red-600">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            
                 <!-- Email Input -->
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-white">Email</label>
@@ -76,14 +86,14 @@
                         placeholder="masukkan email"
                         class="bg-white mt-1 block w-full px-3 py-2 border border-white rounded-full shadow-md focus:outline-none focus:ring-white focus:border-white sm:text-sm">
                 </div>
-
+            
                 <!-- Password Input -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-white">Password</label>
                     <input type="password" id="password" name="password" placeholder="masukkan password"
                         class="bg-white mt-1 block w-full px-3 py-2 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-white focus:border-white sm:text-sm ">
                 </div>
-
+            
                 <!-- Tombol Login -->
                 <div class="flex justify-center">
                     <button type="submit"
@@ -92,6 +102,7 @@
                     </button>
                 </div>
             </form>
+            
         </div>
     </div>
 

@@ -58,14 +58,14 @@
 
             <div
                 class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
-                <a href="{{ url('/home') }}">
+                <a href="{{ url('/homeabsen') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
                             <i class="fas fa-folder"></i>
                         </div>
                         <div class="ml-4">
-                            <div class="text-gray-700 font-semibold">Rekap hari ini</div>
-                            <div class="text-3xl font-bold">{{ $jurnalTodayCount }}</div>
+                            <div class="text-gray-700 font-semibold">Absen hari ini</div>
+                            <div class="text-3xl font-bold">{{ $absenTodayCount }}</div>
                         </div>
                     </div>
                 </a>

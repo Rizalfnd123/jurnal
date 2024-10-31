@@ -50,34 +50,36 @@
                     <h4 class="font-semibold">Kelas: {{ $selectedKelas }}</h4>
                 </div>
             @endif
-            <table id="rjurnalTable" class="min-w-full bg-white rounded-lg">
-                <thead>
-                    <tr class="bg-amber-900 text-white uppercase text-xs leading-normal">
-                        <th class="py-3 px-6 text-left">No</th>
-                        <th class="py-3 px-6 text-left">Hari</th>
-                        <th class="py-3 px-6 text-left">Tanggal</th>
-                        <th class="py-3 px-6 text-left">Materi</th>
-                        <th class="py-3 px-6 text-left">Hadir</th>
-                        <th class="py-3 px-6 text-left">Tidak Hadir</th>
-                        <th class="py-3 px-6 text-left">Dokumentasi</th>
-                        <th class="py-3 px-6 text-left">Waktu Isi</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 text-sm font-light">
-                    @foreach ($rjurnal as $item)
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6">{{ $loop->iteration }}</td>
-                            <td class="py-3 px-6">{{ $item->mengajar->hari }}</td>
-                            <td class="py-3 px-6">{{ $item->created_at->format('Y-m-d') }}</td>
-                            <td class="py-3 px-6">{{ $item->materi }}</td>
-                            <td class="py-3 px-6">{{ $item->hadir }}</td>
-                            <td class="py-3 px-6">{{ $item->tidak_hadir }}</td>
-                            <td class="py-3 px-6">{{ $item->dokumentasi }}</td>
-                            <td class="py-3 px-6">{{ $item->created_at->format('H:i') }}</td>
+            <div class="overflow-x-auto">
+                <table id="rjurnalTable" class="min-w-full bg-white rounded-lg">
+                    <thead>
+                        <tr class="bg-amber-900 text-white uppercase text-xs leading-normal">
+                            <th class="py-3 px-6 text-left">No</th>
+                            <th class="py-3 px-6 text-left">Hari</th>
+                            <th class="py-3 px-6 text-left">Tanggal</th>
+                            <th class="py-3 px-6 text-left">Materi</th>
+                            <th class="py-3 px-6 text-left">Hadir</th>
+                            <th class="py-3 px-6 text-left">Tidak Hadir</th>
+                            <th class="py-3 px-6 text-left">Dokumentasi</th>
+                            <th class="py-3 px-6 text-left">Waktu Isi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        @foreach ($rjurnal as $item)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6">{{ $loop->iteration }}</td>
+                                <td class="py-3 px-6">{{ $item->mengajar->hari }}</td>
+                                <td class="py-3 px-6">{{ $item->created_at->format('Y-m-d') }}</td>
+                                <td class="py-3 px-6">{{ $item->materi }}</td>
+                                <td class="py-3 px-6">{{ $item->hadir }}</td>
+                                <td class="py-3 px-6">{{ $item->tidak_hadir }}</td>
+                                <td class="py-3 px-6">{{ $item->dokumentasi }}</td>
+                                <td class="py-3 px-6">{{ $item->created_at->format('H:i') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

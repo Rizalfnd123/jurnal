@@ -6,7 +6,7 @@
 <div class="w-full px-2">
     <h1 class="text-3xl font-bold text-white mb-3">Siswa</h1>
 </div>
-@endsection
+@endsection 
 
 @section('content')
     <div class="w-full px-2">

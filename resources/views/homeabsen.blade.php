@@ -3,36 +3,20 @@
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-    <div class="">
-        <h3 class="text-3xl font-bold text-white mb-3">Dashboard {{ Auth::user()->name }}</h3>
+    <div class="w-full px-6">
+        <h3 class="text-3xl font-bold text-white mb-3">Dashboard</h3>
     </div>
 @endsection
 
 @section('content')
-    <div class="w-full px-2"> <!-- Tambahkan informasi lokasi di sini -->
-        {{-- <div id="location" class="bg-white rounded-lg shadow-lg p-6 mt-4 mb-4">
-            <h4 class="font-semibold">Lokasi Anda:</h4>
-            <p>Desa: <span id="desa">Loading...</span></p>
-            <p>Kecamatan: <span id="kecamatan">Loading...</span></p>
-            <p>Kota: <span id="kota">Loading...</span></p>
-            <p>Latitude: <span id="lat">Loading...</span></p>
-            <p>Longitude: <span id="lon">Loading...</span></p>
-        <p id="radiusMessage" class="text-red-500 font-semibold "></p>
-        <div id="absen-container" class="hidden">
-            <button id="absensiBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mt-2">
-                Absensi Sekarang
-            </button>
-            <p id="absensiStatus" class="mt-2 text-green-600 font-semibold"></p>    
-        </div>
-        </div>
-        <div id="map" class="bg-white rounded-lg shadow-lg p-6 mt-4 mb-4" style="height: 300px;">
-        </div> --}}
+    <div class="w-full px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
+            <div
+                class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/home') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-book"></i> <!-- Ikon Jurnal -->
+                            <i class="fas fa-book"></i>
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-700 font-semibold">Jurnal hari ini</div>
@@ -41,12 +25,13 @@
                     </div>
                 </a>
             </div>
-        
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
+
+            <div
+                class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/homeizin') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-info-circle"></i> <!-- Ikon Izin -->
+                            <i class="fas fa-info-circle"></i>
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-700 font-semibold">Izin hari ini</div>
@@ -55,12 +40,13 @@
                     </div>
                 </a>
             </div>
-        
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
+
+            <div
+                class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/homejad') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-calendar-alt"></i> <!-- Ikon Jadwal -->
+                            <i class="fas fa-calendar-alt"></i>
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-700 font-semibold">Jadwal hari ini</div>
@@ -69,12 +55,13 @@
                     </div>
                 </a>
             </div>
-        
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
+
+            <div
+                class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/homeabsen') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-folder"></i> <!-- Ikon Jadwal -->
+                            <i class="fas fa-folder"></i>
                         </div>
                         <div class="ml-4">
                             <div class="text-gray-700 font-semibold">Absen hari ini</div>
@@ -85,30 +72,34 @@
             </div>
         </div>
         <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
-            <div class="text-xl font-semibold mb-4">Data Jurnal</div>
+            <div class="text-xl font-semibold mb-4">Absen Hari Ini</div>
             <!-- Membuat tabel responsif dengan overflow-x-auto -->
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white rounded-lg">
                     <thead>
                         <tr class="bg-amber-900 text-white uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Nama Guru</th>
-                            <th class="py-3 px-6 text-left">Kelas</th>
-                            <th class="py-3 px-6 text-left">Mata Pelajaran</th>
-                            <th class="py-3 px-6 text-left">Waktu isi</th>
+                            <th class="py-3 px-6 text-left">No</th>
+                            <th class="py-3 px-6 text-left">Guru</th>
+                            <th class="py-3 px-6 text-left">Waktu</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                        @foreach ($jurnalToday as $item)
+                        @foreach ($absenToday as $item)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left">{{ $loop->iteration }}</td>
                                 <td class="py-3 px-6 text-left">{{ $item->guru->nama }}</td>
-                                <td class="py-3 px-6 text-left">{{ $item->kelas->kelas }}</td>
-                                <td class="py-3 px-6 text-left">{{ $item->mapel->mapel }}</td>
-                                <td class="py-3 px-6 text-left">{{ $item->updated_at }}</td>
+                                <!-- Ambil langsung dari kolom jam -->
+                                <td class="py-3 px-6 text-left">{{ $item->created_at }}</td> <!-- Relasi mapel -->
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>
+    </div>
+    </div>
+    </div><!-- .animated -->
+    </div>
     </div>
 @endsection

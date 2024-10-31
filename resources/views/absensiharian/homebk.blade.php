@@ -1,4 +1,4 @@
-@extends('hm')
+@extends('hmbk')
 
 @section('title', 'Dashboard')
 
@@ -27,7 +27,7 @@
         </div>
         <div id="map" class="bg-white rounded-lg shadow-lg p-6 mt-4 mb-4" style="height: 300px;">
         </div> --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
                 <a href="{{ url('/home') }}">
                     <div class="flex items-center">
@@ -109,6 +109,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
