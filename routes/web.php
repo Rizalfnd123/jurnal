@@ -1,8 +1,6 @@
 <?php
-
 use App\Models\Mengajar;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\GuruController;
@@ -25,6 +23,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JadwalhariController;
 use App\Http\Controllers\RabsenguruController;
 use App\Http\Controllers\AbsensiharianController;
+use App\Http\Controllers\PimpinanController;
 
 Route::get('/storage-link', function () {
     Artisan::call('storage:link');
@@ -33,7 +32,7 @@ Route::get('/storage-link', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    // routes/web.php
+    Route::get('/homepimpinan', [PimpinanController::class, 'home'])->name('pimpinan.home');
     Route::post('/absenguru', [AbsensiController::class, 'store'])->name('absenguru.store');
 
     Route::get('/getKelas/{tapel_id}', [KelasController::class, 'getKelasByTapel']);

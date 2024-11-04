@@ -37,7 +37,9 @@ class SesiController extends Controller
             return redirect("/home");
         } elseif (Auth::user()->role == 'BK') {
             return redirect("/homebk"); // arahkan ke halaman khusus BK
-        } else {
+        } elseif (Auth::user()->role == 'pimpinan') {
+            return redirect("/homepimpinan"); 
+        }else {
             return redirect("/homeguru");
         }
     } elseif (Auth::guard('guru')->attempt($gcredentials)) {
