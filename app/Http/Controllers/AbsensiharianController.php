@@ -13,7 +13,27 @@ class AbsensiharianController extends Controller
 {
     public function home()
     {
-        return view('absensiharian.homebk');
+        $today = Carbon::today();
+        $kelas = Kelas::all();
+        $siswa = Siswas::all();
+        $rekapAbsensi = DB::table('absensiswas')
+            ->join('siswas', 'absensiswas.siswas_id', '=', 'siswas.id')
+            ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+            ->select('absensiswas.hari', DB::raw('DATE(absensiswas.created_at) as tanggal'), 'kelas.kelas')
+            ->distinct()
+            ->get();
+        $absensi = Absensiswa::whereDate('created_at', $today)->get();
+        $jumlahsiswa = $siswa->count();
+        $jumlahkelas = $kelas->count();
+        $jumlahrekap = $rekapAbsensi->count();
+        $absensitoday = $absensi->count();
+        return view('absensiharian.homebk', compact('siswa', 'jumlahsiswa','jumlahkelas','jumlahrekap','absensitoday'));
+    }
+    public function siswa()
+    {
+        $siswas = Siswas::paginate(15);
+        // return $siswas;
+        return view('absensiharian.siswa', ['siswas' => $siswas]);
     }
     public function absen(Request $request)
     {

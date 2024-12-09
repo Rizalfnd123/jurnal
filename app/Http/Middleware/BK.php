@@ -23,6 +23,6 @@ class BK
         }
 
         // Jika kondisi tidak terpenuhi, arahkan ke halaman lain atau tampilkan pesan
-        return redirect()->route('home')->with('error', 'Akses ditolak. Anda tidak memiliki izin.');
+        return redirect()->route('/')->with('error', 'Akses ditolak. Anda tidak memiliki izin.');
     }
 }

@@ -43,25 +43,35 @@ class DashboardController extends Controller
     }
     public function indexguru()
     {
+        $guruId = Auth::user()->id;
+        $guru = Guru::find($guruId);
         $today = Carbon::today();
 
         // Ambil hari dalam format bahasa Indonesia
         $jadtoday = Carbon::now()->locale('id')->isoFormat('dddd'); // "Senin", "Selasa", dll.
 
         // Ambil data jurnal dan jadwal berdasarkan hari ini
-        $jurnalToday = Jurnal::whereDate('created_at', $today)->get();
-        $jadwalToday = Mengajar::where('hari', $jadtoday)->get();
-        $izinToday = Izin::whereDate('created_at', $today)->get();
-        $absenToday = Absenguru::whereDate('created_at', $today)->get();
+        $jurnalToday = Jurnal::whereDate('created_at', $today)
+        ->whereHas('mengajar', function ($query) use ($guruId) {
+            $query->where('guru_id', $guruId);
+        })
+        ->get();
+        $jadwalToday = Mengajar::where('hari', $jadtoday)
+        ->where('guru_id', $guruId)
+        ->get();
+        $izinToday = Izin::whereDate('created_at', $today)
+        ->whereHas('mengajar', function ($query) use ($guruId) {
+            $query->where('guru_id', $guruId);
+        })
+        ->get();
+        $absenToday = Absenguru::whereDate('created_at', $today)
+        ->where('guru_id', $guruId)
+        ->get();
         $absenTodayCount = $absenToday->count();
-
-        // Hitung jumlah jurnal, jadwal, dan izin hari ini
         $jurnalTodayCount = $jurnalToday->count();
         $jadwalTodayCount = $jadwalToday->count();
         $izinTodayCount = $izinToday->count();
         
-        $guruId = Auth::user()->id;
-        $guru = Guru::find($guruId);
         $sudahAbsen = DB::table('absengurus')
             ->whereDate('created_at', now()->toDateString())
             ->where('guru_id', $guruId)

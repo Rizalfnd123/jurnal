@@ -1,4 +1,4 @@
-@extends('hm')
+@extends('hminval')
 
 @section('title', 'Dashboard')
 
@@ -15,13 +15,13 @@
                 <div class="p-2">
                     <div class="flex justify-between">
                         <h2 class="text-lg font-semibold pt-3 ps-3">Data Izin</h2>
-                        <a href="{{ url('izin') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        <a href="{{ url('invalizin') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
                             <i class="fa fa-undo"></i> Kembali
                         </a>
                     </div>
                 </div>
                 <div class="p-4">
-                    <form action="{{ url('izin') }}" method="post" enctype="multipart/form-data" class="shadow-lg p-6 bg-gray-50 rounded-lg">
+                    <form action="{{ url('invalizin') }}" method="post" enctype="multipart/form-data" class="shadow-lg p-6 bg-gray-50 rounded-lg">
                         @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>

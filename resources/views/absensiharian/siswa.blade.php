@@ -1,4 +1,4 @@
-@extends('hm')
+@extends('hmbk')
 
 @section('title', 'Dashboard')
 
@@ -17,7 +17,7 @@
                 </div>
             @endif
 
-            <div class="mb-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
+            {{-- <div class="mb-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
                 <strong class="text-lg font-semibold mb-2 sm:mb-0">Data Siswa</strong>
                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
                     <a href="{{ url('siswas/create') }}"
@@ -29,7 +29,7 @@
                         <i class="fa fa-upload"></i> Import
                     </a>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Tabel Data Siswa -->
             <div class="overflow-x-auto">
@@ -41,7 +41,7 @@
                             <th class="px-2 py-3 text-center">L/P</th>
                             <th class="px-2 py-3 text-center">Kelas</th>
                             <th class="px-2 py-3 text-center">Status</th>
-                            <th class="px-2 py-3 text-center" style="width: 80px;">Aksi</th>
+                            {{-- <th class="px-2 py-3 text-center" style="width: 80px;">Aksi</th> --}}
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-xs font-light">
@@ -56,7 +56,7 @@
                                         {{ $item->status }}
                                     </span>
                                 </td>
-                                <td class="px-2 py-3 text-center">
+                                {{-- <td class="px-2 py-3 text-center">
                                     <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="mr-2">
                                         <i class="fa fa-pencil"></i>
                                     </a>
@@ -68,7 +68,7 @@
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

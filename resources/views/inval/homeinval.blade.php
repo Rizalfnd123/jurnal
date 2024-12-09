@@ -1,4 +1,4 @@
-@extends('hmbk')
+@extends('hminval')
 
 @section('title', 'Dashboard')
 
@@ -12,56 +12,59 @@
     <div class="w-full px-2"> <!-- Tambahkan informasi lokasi di sini -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
-                <a href="{{ url('/siswa-bk') }}">
+                {{-- <a href="{{ url('/home') }}"> --}}
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
                             <i class="fas fa-user"></i> <!-- Ikon Jurnal -->
                         </div>
                         <div class="ml-4">
-                            <div class="text-gray-700 font-semibold">Total Siswa</div>
-                            <div class="text-3xl font-bold">{{ $jumlahsiswa }}</div>
+                            <div class="text-gray-700 font-semibold">Jumlah Guru</div>
+                            <div class="text-3xl font-bold">{{ $jumlahguru }}</div>
+                        </div>
+                    </div>
+                {{-- </a> --}}
+            </div>
+        
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
+                <a href="{{ url('/invalizin') }}">
+                    <div class="flex items-center">
+                        <div class="text-amber-900 text-5xl">
+                            <i class="fas fa-info-circle"></i> <!-- Ikon Izin -->
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-gray-700 font-semibold">Izin hari ini</div>
+                            <div class="text-3xl font-bold">{{ $izintoday }}</div>
                         </div>
                     </div>
                 </a>
             </div>
+        
             <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
-                {{-- <a href="{{ url('/siswa-bk') }}"> --}}
+                {{-- <a href="{{ url('/homejad') }}"> --}}
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-school"></i> <!-- Ikon Jurnal -->
+                            <i class="fas fa-folder"></i> <!-- Ikon Jadwal -->
                         </div>
                         <div class="ml-4">
-                            <div class="text-gray-700 font-semibold">Total Kelas</div>
-                            <div class="text-3xl font-bold">{{ $jumlahkelas }}</div>
+                            <div class="text-gray-700 font-semibold">Total Izin</div>
+                            <div class="text-3xl font-bold">{{ $izintotal }}</div>
                         </div>
                     </div>
                 {{-- </a> --}}
             </div>
+        
             <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
-                {{-- <a href="{{ url('/siswa-bk') }}"> --}}
+                <a href="{{ url('/invaljadwalhariini') }}">
                     <div class="flex items-center">
                         <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-folder"></i> <!-- Ikon Jurnal -->
+                            <i class="fas fa-calendar-alt"></i> <!-- Ikon Jadwal -->
                         </div>
                         <div class="ml-4">
-                            <div class="text-gray-700 font-semibold">Total Rekap</div>
-                            <div class="text-3xl font-bold">{{ $jumlahrekap }}</div>
+                            <div class="text-gray-700 font-semibold">Jadwal hari ini</div>
+                            <div class="text-3xl font-bold">{{ $jadwalToday }}</div>
                         </div>
                     </div>
-                {{-- </a> --}}
-            </div>
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition duration-300">
-                {{-- <a href="{{ url('/siswa-bk') }}"> --}}
-                    <div class="flex items-center">
-                        <div class="text-amber-900 text-5xl">
-                            <i class="fas fa-clock"></i> <!-- Ikon Jurnal -->
-                        </div>
-                        <div class="ml-4">
-                            <div class="text-gray-700 font-semibold">Absen Hari Ini</div>
-                            <div class="text-3xl font-bold">{{ $absensitoday }} Siswa</div>
-                        </div>
-                    </div>
-                {{-- </a> --}}
+                </a>
             </div>
         </div>
         {{-- <div class="mt-8 bg-white rounded-lg shadow-lg p-6">

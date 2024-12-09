@@ -96,7 +96,7 @@
         class="bg-amber-800 text-white w-64 h-[calc(100%-64px)] fixed left-0 top-16 transform -translate-x-full transition-transform duration-300 z-10 bg bg-opacity-80 backdrop-blur-sm">
         <div class="p-4">
             <ul class="mt-4">
-                <li><a href="{{ url('home') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
+                <li><a href="{{ url('homepimpinan') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-house ms-2"></i> Home</a></li>
                 <li class="relative">
                     {{-- <a href="#" id="data-dropdown"
@@ -119,11 +119,11 @@
                                     class="fa fa-folder ms-2"></i> Semester</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url('guru') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
+                <li><a href="{{ url('pimpinan-guru') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-user ms-2"></i> Data Guru</a></li>
-                <li><a href="{{ url('siswas') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
+                <li><a href="{{ url('pimpinan-siswa') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-user ms-2"></i> Data Siswa</a></li>
-                <li><a href="{{ url('mengajar') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
+                <li><a href="{{ url('pimpinan-jadwal') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-bars ms-2"></i> Jadwal Mengajar</a>
                 </li>
                 {{-- <li><a href="{{ url('jurnal') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
@@ -140,16 +140,16 @@
                     <!-- Dropdown menu -->
                     <ul id="rekap-dropdown-menu"
                         class="absolute left-0 mt-2 w-48 bg-amber-700 text-white rounded-md shadow-lg hidden">
-                        <li><a href="{{ url('rkbm') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
+                        {{-- <li><a href="{{ url('rkbm') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
                                     class="fa fa-file ms-2"></i> Rekap KBM</a></li>
                         <li><a href="{{ url('rjurnal') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
                                     class="fa fa-folder ms-2"></i> Rekap Jurnal</a></li>
                         <li><a href="{{ url('rizin') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
-                                    class="fa fa-folder ms-2"></i> Rekap Izin</a></li>
-                        <li><a href="{{ url('rabsenguru') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
+                                    class="fa fa-folder ms-2"></i> Rekap Izin</a></li> --}}
+                        <li><a href="{{ url('pimpinan-rekap-absen-guru') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
                                     class="fa fa-folder ms-2"></i> Absensi Guru</a></li>
-                        <li><a href="{{ url('rabsen') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
-                                    class="fa fa-folder ms-2"></i> Rekap Absensi</a></li>
+                        {{-- <li><a href="{{ url('rabsen') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
+                                    class="fa fa-folder ms-2"></i> Rekap Absensi</a></li> --}}
                     </ul>
                 </li>
                 

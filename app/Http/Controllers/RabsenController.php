@@ -18,35 +18,35 @@ class RabsenController extends Controller
     }
 
     public function filter(Request $request)
-{
-    $kelas = Kelas::all();
-    $bulanInput = $request->input('bulan');
+    {
+        $kelas = Kelas::all();
+        $bulanInput = $request->input('bulan');
 
-    // Pastikan input bulan dalam format "Y-m"
-    $tahun = Carbon::createFromFormat('Y-m', $bulanInput)->year;
-    $bulan = Carbon::createFromFormat('Y-m', $bulanInput)->month;
+        // Pastikan input bulan dalam format "Y-m"
+        $tahun = Carbon::createFromFormat('Y-m', $bulanInput)->year;
+        $bulan = Carbon::createFromFormat('Y-m', $bulanInput)->month;
 
-    $startOfMonth = Carbon::create($tahun, $bulan, 1)->startOfMonth();
-    $endOfMonth = Carbon::create($tahun, $bulan, 1)->endOfMonth();
+        $startOfMonth = Carbon::create($tahun, $bulan, 1)->startOfMonth();
+        $endOfMonth = Carbon::create($tahun, $bulan, 1)->endOfMonth();
 
-    $bulanName = Carbon::create($tahun, $bulan)->translatedFormat('F');
+        $bulanName = Carbon::create($tahun, $bulan)->translatedFormat('F');
 
-    $kelasId = $request->input('kelas');
-    $selectedKelas = Kelas::find($kelasId)->kelas ?? '';
+        $kelasId = $request->input('kelas');
+        $selectedKelas = Kelas::find($kelasId)->kelas ?? '';
 
-    // Mengambil data Absens terkait dengan join ke mengajars untuk mendapatkan kelas_id
-    $rabsen = Absen::with('siswa', 'jurnal')
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-        ->whereHas('jurnal', function ($query) use ($kelasId) {
-            $query->whereHas('mengajar', function ($q) use ($kelasId) {
-                $q->where('kelas_id', $kelasId);
-            });
-        })
-        ->get()
-        ->groupBy('siswas_id');
+        // Mengambil data Absens terkait dengan join ke mengajars untuk mendapatkan kelas_id
+        $rabsen = Absen::with('siswa', 'jurnal')
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->whereHas('jurnal', function ($query) use ($kelasId) {
+                $query->whereHas('mengajar', function ($q) use ($kelasId) {
+                    $q->where('kelas_id', $kelasId);
+                });
+            })
+            ->get()
+            ->groupBy('siswas_id');
 
-    return view('rabsen.filter', compact('rabsen', 'kelas', 'bulanName', 'selectedKelas'));
-}
+        return view('rabsen.filter', compact('rabsen', 'kelas', 'bulanName', 'selectedKelas'));
+    }
 
 
 

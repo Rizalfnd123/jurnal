@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Izin extends Model
-{ 
-     use HasFactory;
+{
+    use HasFactory;
 
     // Tentukan kolom-kolom yang dapat diisi secara massal
     protected $fillable = [
-        'mengajar_id', 'jam', 'ket', 'surat', 'kegiatan', 'lampiran',
+        'mengajar_id',
+        'jam',
+        'ket',
+        'surat',
+        'kegiatan',
+        'lampiran',
         // kolom lain jika ada
     ];
-     public function mengajar()
-     {
-         return $this->belongsTo(Mengajar::class, 'mengajar_id');
-     }
+    public function mengajar()
+    {
+        return $this->belongsTo(Mengajar::class, 'mengajar_id');
+    }
 
     public function guru()
     {

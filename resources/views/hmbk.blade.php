@@ -69,7 +69,7 @@
                 </button>
                 <div id="dropdown-menu"
                     class="absolute right-0 mt-2 w-48 bg-amber-600 text-white rounded-md shadow-lg hidden">
-                    <a href="{{ route('profil') }}" class="block px-4 py-2 hover:bg-amber-500">Profil</a>
+                    {{-- <a href="{{ route('profil') }}" class="block px-4 py-2 hover:bg-amber-500">Profil</a> --}}
                     <a href="{{ url('') }}" class="block px-4 py-2 hover:bg-amber-500">Logout</a>
                 </div>
             </div>
@@ -82,7 +82,7 @@
         class="bg-amber-800 text-white w-64 h-[calc(100%-64px)] fixed left-0 top-16 transform -translate-x-full transition-transform duration-300 z-10 bg bg-opacity-80 backdrop-blur-sm">
         <div class="p-4">
             <ul class="mt-4">
-                <li><a href="{{ url('homeguru') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
+                <li><a href="{{ url('homebk') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-house ms-2"></i> Home</a></li>
                 <li class="relative">
                     {{-- <a href="#" id="data-dropdown"
@@ -107,7 +107,7 @@
                 </li>
                 {{-- <li><a href="{{ url('guru') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-user ms-2"></i> Data Guru</a></li> --}}
-                <li><a href="{{ url('siswas') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
+                <li><a href="{{ url('/siswa-bk') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-user ms-2"></i> Data Siswa</a></li>
                 <li><a href="{{ url('absensiharian') }}" class="block py-2 hover:bg-amber-600 rounded"> <i
                             class="fa fa-user ms-2"></i> Absen Harian Siswa</a></li>

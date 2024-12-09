@@ -1,4 +1,4 @@
-@extends('hm')
+@extends('hmpimpinan')
 
 @section('title', 'Dashboard')
 
@@ -20,14 +20,14 @@
             <div class="mb-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
                 <strong class="text-lg font-semibold mb-2 sm:mb-0">Data Siswa</strong>
                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-                    <a href="{{ url('siswas/create') }}"
+                    {{-- <a href="{{ url('siswas/create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center w-full sm:w-auto">
                         <i class="fa fa-plus"></i> Tambah
                     </a>
                     <a href="{{ route('siswas.import') }}"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center w-full sm:w-auto">
                         <i class="fa fa-upload"></i> Import
-                    </a>
+                    </a> --}}
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                             <th class="px-2 py-3 text-center">L/P</th>
                             <th class="px-2 py-3 text-center">Kelas</th>
                             <th class="px-2 py-3 text-center">Status</th>
-                            <th class="px-2 py-3 text-center" style="width: 80px;">Aksi</th>
+                            {{-- <th class="px-2 py-3 text-center" style="width: 80px;">Aksi</th> --}}
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-xs font-light">
@@ -56,7 +56,7 @@
                                         {{ $item->status }}
                                     </span>
                                 </td>
-                                <td class="px-2 py-3 text-center">
+                                {{-- <td class="px-2 py-3 text-center">
                                     <a href="{{ url('siswas/' . $item->id . '/edit') }}" class="mr-2">
                                         <i class="fa fa-pencil"></i>
                                     </a>
@@ -68,7 +68,7 @@
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -76,7 +76,7 @@
             </div>
             <!-- Pagination -->
             <div class="mt-3 ">
-               
+                {{ $siswas->links() }}
             </div>
         </div>
     </div>

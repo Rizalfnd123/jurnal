@@ -36,24 +36,15 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'guru' => [ // Guard baru untuk guru
-            'driver' => 'session',
-            'provider' => 'gurus',
-        ],
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
-        'BK' => [  // Guard untuk role BK
-            'driver' => 'session',
-            'provider' => 'users', // atau 'bk' jika Anda memiliki provider terpisah untuk role BK
-        ],
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+    'guru' => [
+        'driver' => 'session',
+        'provider' => 'gurus',
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -73,20 +64,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
-        'gurus' => [ // Provider untuk tabel guru
-            'driver' => 'eloquent',
-            'model' => App\Models\Guru::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
     ],
+    'gurus' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Guru::class,
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
