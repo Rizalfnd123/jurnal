@@ -12,14 +12,14 @@ class SiswaImport implements ToModel, WithHeadingRow, WithValidation
 {
     public function model(array $row)
 {
-    if (!isset($row['nis'], $row['nama'], $row['kelamin'], $row['kelas_id'], $row['status'])) {
+    if (!isset($row['nis'], $row['nama'], $row['jenis_kelamin'], $row['kelas_id'], $row['status'])) {
         return null; // Abaikan baris yang datanya tidak lengkap
     }
 
     return new Siswas([
         'nis'       => $row['nis'],
         'nama'      => $row['nama'],
-        'kelamin'   => $row['kelamin'],
+        'kelamin'   => $row['jenis_kelamin'],
         'kelas_id'  => $row['kelas_id'],
         'status'    => $row['status'],
     ]);

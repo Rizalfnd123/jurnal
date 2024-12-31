@@ -144,8 +144,8 @@
                     <!-- Dropdown menu -->
                     <ul id="rekap-dropdown-menu"
                         class="absolute left-0 mt-2 w-48 bg-amber-700 text-white rounded-md shadow-lg hidden">
-                        <li><a href="{{ url('rkbm') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
-                                    class="fa fa-file ms-2"></i> Rekap KBM</a></li>
+                        {{-- <li><a href="{{ url('rkbm') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
+                                    class="fa fa-file ms-2"></i> Rekap KBM</a></li> --}}
                         <li><a href="{{ url('rjurnal') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i
                                     class="fa fa-folder ms-2"></i> Rekap Jurnal</a></li>
                         <li><a href="{{ url('rizin') }}" class="block py-2 px-4 hover:bg-amber-600 rounded"><i

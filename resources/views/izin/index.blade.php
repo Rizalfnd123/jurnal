@@ -84,18 +84,25 @@
                                     </td>
                                     <td class="py-3 px-6">{{ $item->kegiatan }}</td>
                                     <td class="py-3 px-6">{{ $item->lampiran }}</td>
-                                    <td class="py-3 px-6 space-x-2">
-                                        <a href="{{ url('izin/' . $item->id . '/edit') }}" class="text-blue-500 hover:text-blue-700">
-                                            <i class="fa fa-pencil"> Edit</i>
+                                    <td class="py-3 px-6 space-y-2">
+                                        <!-- Tombol Edit -->
+                                        <a href="{{ url('izin/' . $item->id . '/edit') }}" 
+                                           class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded-full shadow-md transition duration-300 text-xs text-center">
+                                             Edit
                                         </a>
-                                        <form action="{{ url('izin/' . $item->id) }}" method="post" class="inline-block" onsubmit="return confirm('Yakin hapus data?')">
+                                        
+                                        <!-- Tombol Hapus -->
+                                        <form action="{{ url('izin/' . $item->id) }}" method="post" class="inline-block"
+                                              onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="text-red-500 hover:text-red-700">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                            <button type="submit" 
+                                                    class="block bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full shadow-md transition duration-300 text-xs text-center">
+                                                 Hapus
                                             </button>
                                         </form>
                                     </td>
+                                    
                                 </tr>
                             @endforeach
                         </tbody>

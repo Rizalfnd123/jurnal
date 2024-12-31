@@ -37,7 +37,7 @@
                 <div class="mb-4">
                     <label for="file" class="block text-sm text-gray-700">Pilih File Excel (xlsx/csv)</label>
                     <input type="file" name="file" id="file" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('file') is-invalid @enderror" required>
-
+        
                     <!-- Tampilkan error khusus untuk input file -->
                     @error('file')
                         <span class="text-red-600 text-sm mt-1">
@@ -45,16 +45,22 @@
                         </span>
                     @enderror
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <a href="{{ url('siswas') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
                         Kembali
                     </a>
-                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
-                        Import
-                    </button>
+                    <div class="flex space-x-2">
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                            Import
+                        </button>
+                        <a href="{{ asset('template_siswa.xlsx') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                            Template Siswa
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>
+        
     </div>
 </div>
 @endsection

@@ -73,23 +73,37 @@
                                     <td class="py-2 px-4">{{ $item->materi }}</td>
                                     <td class="py-2 px-4">{{ $item->hadir }}</td>
                                     <td class="py-2 px-4">{{ $item->tidak_hadir }}</td>
-                                    <td class="py-2 px-4">{{ $item->dokumentasi }}</td>
-                                    <td class="py-2 px-4 space-x-2">
-                                        <a href="{{ route('absensi.create', ['jurnal_id' => $item->id]) }}" class="text-green-500 hover:text-green-700 text-xs">
-                                            <i class="fa fa-book"> Absen</i>
+                                    <td class="py-2 px-4">
+                                        <a href="{{ route('image-guru.preview', ['type' => 'dokumentasi', 'id' => $item->id]) }}" target="_blank">
+                                            <img src="{{ asset('storage/' . $item->dokumentasi) . '?' . time() }}" alt="Dokumentasi"
+                                                 style="max-width: 200px;">
                                         </a>
-                                        <a href="{{ url('jurnal/' . $item->id . '/edit') }}" class="text-blue-500 hover:text-blue-700 text-xs">
-                                            <i class="fa fa-pencil"> Edit</i>
+                                    </td> 
+                                    <td class="py-2 px-4 space-y-2">
+                                        <!-- Tombol Absen -->
+                                        <a href="{{ route('absensi.create', ['jurnal_id' => $item->id]) }}" 
+                                           class="block bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded-full shadow-md transition duration-300 text-xs text-center">
+                                            Absen
                                         </a>
+                                        
+                                        <!-- Tombol Edit -->
+                                        <a href="{{ url('jurnal/' . $item->id . '/edit') }}" 
+                                           class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded-full shadow-md transition duration-300 text-xs text-center">
+                                            Edit
+                                        </a>
+                                        
+                                        <!-- Tombol Hapus -->
                                         <form action="{{ url('jurnal/' . $item->id) }}" method="post" class="inline-block"
-                                            onsubmit="return confirm('Yakin hapus data?')">
+                                              onsubmit="return confirm('Yakin hapus data?')">
                                             @method('delete')
                                             @csrf
-                                            <button class="text-red-500 hover:text-red-700 text-xs">
-                                                <i class="fa fa-trash"> Hapus</i>
+                                            <button type="submit" 
+                                                    class="block bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full shadow-md transition duration-300 text-xs text-center">
+                                                Hapus
                                             </button>
                                         </form>
                                     </td>
+                                    
                                 </tr>
                             @endforeach
                         </tbody>

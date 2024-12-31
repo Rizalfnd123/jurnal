@@ -14,7 +14,7 @@ class GuruImport implements ToModel, WithHeadingRow
         return new Guru([
             'nip' => $row['nip'],
             'nama' => $row['nama'],
-            'kelamin' => $row['kelamin'],
+            'kelamin' => $row['jenis_kelamin'],
             'username' => '',  // Kosongkan username
             'password' => '',  // Kosongkan password
             'foto'     => '',  // Kosongkan foto
